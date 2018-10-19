@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/profileBMI"
+        android:title="PROFILE"
+        android:icon="@drawable/profile_cyan_lt"
+        app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/serviceBMI"
+        android:title="SERVICE"
+        android:icon="@drawable/services_cyan_lt"
+        app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/dashboardBMI"
+        android:title="DASHBOARD"
+        android:icon="@drawable/dashboard_cyan_lt"
+        app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/doctorsBMI"
+        android:title="DOCTORS"
+        android:icon="@drawable/doc_cyan_dk"
+        app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/apptBMI"
+        android:title="APPOINT"
+        android:icon="@drawable/appt_cyan_lt"
+        app:showAsAction="always|withText" />
+
+</menu>

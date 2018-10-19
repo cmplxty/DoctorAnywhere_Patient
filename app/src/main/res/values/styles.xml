@@ -1,0 +1,28 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.Fullscreen" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="AppTheme.Launcher" parent="AppTheme.Fullscreen">
+        <item name="android:windowBackground">@drawable/splash_screen_bg</item>
+    </style>
+
+    <style name="AppTheme.ViewImage" parent="AppTheme.Fullscreen">
+        <item name="colorPrimaryDark">@android:color/black</item>
+    </style>
+
+    <style name="SpotDialogTheme" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Theme.Dialog</item>
+        <item name="DialogSpotColor">@color/colorPrimaryDark</item>
+        <item name="DialogSpotCount">5</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+</resources>

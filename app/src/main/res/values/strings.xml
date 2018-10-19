@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">Patient App</string>
+    <string name="app_name_main">Health Care</string>
+    <string name="imageview">ImageView</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forget_password"><u>Forget Password ?</u></string>
+    <string name="sign_up">Sign Up</string>
+    <string name="name">Name</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up_b_u"><b><u>Sign Up</u></b></string>
+    <string name="message_cap">MESSAGE</string>
+    <string name="message">Message</string>
+    <string name="your_all_appointments">Your all appointments</string>
+    <string name="wooops_you_don_t_have_any_appointments">Wooops... you don\'t have any appointments.</string>
+    <string name="our_verified_doctors_list">Our verified doctors list.</string>
+    <string name="remainder_bell">Remainder Bell</string>
+    <string name="developer_name">Md. Sadman Shamsuddin</string>
+    <string name="developer_email">md.sadman.shams@gmail.com</string>
+    <string name="mail_image">Mail Image</string>
+    <string name="phone_image">Phone Image</string>
+    <string name="developer_phone">+880-196489-5094</string>
+    <string name="home_image">Home Image</string>
+    <string name="developer_home">47/10 West Razabazar, Dhaka</string>
+    <string name="developer_gender">Male</string>
+    <string name="developer_dob">22-03-1995</string>
+    <string name="doctor_image">Doctor Image</string>
+    <string name="doctor">DOCS</string>
+    <string name="_15">15</string>
+    <string name="appt">APPT</string>
+    <string name="edit_image">Edit Image</string>
+    <string name="payment">PAYMENT</string>
+    <string name="payment_image">Payment Image</string>
+    <string name="help_image">Help Image</string>
+    <string name="sign_out_image">Sign Out Image</string>
+    <string name="help_cap">HELP</string>
+    <string name="sign_out">SIGN OUT</string>
+    <string name="forum_image">Forum Image</string>
+    <string name="forum">FORUM</string>
+    <string name="blood_cap">BLOOD</string>
+    <string name="nurse_cap">NURSE</string>
+    <string name="blog_image">Blog Image</string>
+    <string name="blog_cap">BLOG</string>
+    <string name="nurse_image">Nurse Image</string>
+    <string name="card_number">Card Number</string>
+    <string name="payment_fcap">Payment</string>
+    <string name="card_holder_name">Card Holder Name</string>
+    <string name="expiry_mm_yyyy">Expiry (mm/yyyy)</string>
+    <string name="ccv">CCV</string>
+    <string name="enter_your_payment_details_to_use_it_without_re_enter_every_thing_again">Enter your payment details to use it without re-enter every thing again.</string>
+    <string name="save">Save</string>
+    <string name="close">Close</string>
+    <string name="doctor_name_sample">Dr. Jhon Doe</string>
+    <string name="doctor_degree_sample">M.B.B.S.</string>
+    <string name="doctor_specialist_sample">Specialist: Cardiologists</string>
+    <string name="dhaka_bangladesh">Dhaka, Bangladesh</string>
+    <string name="doctor_rating_sample">5.0</string>
+    <string name="rating_star_image">Rating Star Image</string>
+    <string name="welcome_note">Welcome, Now you are able to get treatment from our verified doctors</string>
+    <string name="enter_your_message">Enter your message</string>
+    <string name="camera_image">Camera Image</string>
+    <string name="send_image">Send Image</string>
+    <string name="choose_a_doctor_to_message">Choose A Doctor to Message</string>
+    <string name="choose_doctor_to_message">Choose Doctor to Message</string>
+    <string name="bangladesh">Bangladesh</string>
+    <string name="you_can_find_nurses_for_service">You can find nurses for service</string>
+    <string name="choose">Choose</string>
+    <string name="marcello_genigaro">Marcello Genigaro</string>
+    <string name="monthly">Type: Monthly</string>
+    <string name="female">Gender: Female</string>
+    <string name="prescription_cap">PRESCRIPTION</string>
+    <string name="prescription_image">Prescription Image</string>
+
+    <string-array name="nurse_array">
+        <item>Old</item>
+        <item>New</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Hourly</item>
+        <item>Monthly</item>
+    </string-array>
+</resources>
