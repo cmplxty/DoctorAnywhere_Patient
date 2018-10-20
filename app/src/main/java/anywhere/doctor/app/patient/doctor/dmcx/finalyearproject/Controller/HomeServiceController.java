@@ -81,4 +81,13 @@ public class HomeServiceController {
             }
         });
     }
+
+    public static void LoadHomeServiceRequests(final IAction action) {
+        Vars.appFirebase.loadHomeService(new ICallback() {
+            @Override
+            public void onCallback(boolean isSuccessful, Object object) {
+                action.onCompleteAction(object);
+            }
+        });
+    }
 }

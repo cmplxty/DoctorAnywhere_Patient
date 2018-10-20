@@ -11,6 +11,7 @@
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up_b_u"><b><u>Sign Up</u></b></string>
     <string name="message_cap">MESSAGE</string>
+    <string name="home_service_cap">HOME SERVICE</string>
     <string name="message">Message</string>
     <string name="your_all_appointments">Your all appointments</string>
     <string name="wooops_you_don_t_have_any_appointments">Wooops... you don\'t have any appointments.</string>

@@ -20,4 +20,5 @@ public class ErrorText {
     public static final String ErrorUserNotExists = "Error! User not exists.";
     public static final String ErrorRequestSentFailed = "Error! Failed to sent request.";
     public static final String RequestCancelFailed = "Error! Failed to cancel request.";
+    public static final String PermissionNeededToCallDoctor = "Permission needed to call doctor.";
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Parcelable;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.HomeService.DoctorListHomeServiceActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.HomeService.HomeServiceListActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Messenger.DoctorsListMessageActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Messenger.PrescriptionActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Messenger.MessageUserListActivity;
@@ -99,6 +100,16 @@ public class ActivityTrigger {
     public static void DoctorListHomeServiceActivity() {
         Activity activity = RefActivity.refACActivity.get();
         Intent intent = new Intent(activity, DoctorListHomeServiceActivity.class);
+        activity.startActivity(intent);
+    }
+
+
+    /*
+     * Home Service List Activity
+     * */
+    public static void HomeServiceListActivity() {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, HomeServiceListActivity.class);
         activity.startActivity(intent);
     }
 }

@@ -26,6 +26,7 @@ public class DashboardFragment extends Fragment {
     private ConstraintLayout bloodPageCL;
     private ConstraintLayout nursePageCL;
     private ConstraintLayout helpPageCL;
+    private ConstraintLayout homeServicePageCL;
     // Variables
 
     // Methods
@@ -36,6 +37,7 @@ public class DashboardFragment extends Fragment {
         bloodPageCL = view.findViewById(R.id.bloodPageCL);
         helpPageCL = view.findViewById(R.id.helpPageCL);
         nursePageCL = view.findViewById(R.id.nursePageCL);
+        homeServicePageCL = view.findViewById(R.id.homeServicePageCL);
     }
 
     private void event() {
@@ -57,6 +59,13 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ActivityTrigger.NurseActivity();
+            }
+        });
+
+        homeServicePageCL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityTrigger.HomeServiceListActivity();
             }
         });
     }

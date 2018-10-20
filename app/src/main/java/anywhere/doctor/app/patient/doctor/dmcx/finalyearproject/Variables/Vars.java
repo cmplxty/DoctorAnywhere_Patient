@@ -33,4 +33,8 @@ public class Vars {
         public static final String FROM_MESSAGE_USER_LIST_ACTIVITY = "FROM MESSAGE USER LIST ACTIVITY -- 0x2";
         public static final String FROM_DOCTOR_LIST_ACTIVITY = "FROM DOCTOR LIST ACTIVITY -- 0x3";
     }
+
+    public static class RequeseCode {
+        public static final int REQUEST_CALL_CODE_HS = 1111;
+    }
 }

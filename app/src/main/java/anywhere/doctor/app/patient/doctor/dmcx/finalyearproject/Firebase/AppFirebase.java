@@ -30,6 +30,7 @@ import java.util.UUID;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Doctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.HSDoctor;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.HomeService;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Message;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.MessageUser;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Patient;
@@ -522,6 +523,9 @@ public class AppFirebase {
                 });
     }
 
+    /*
+    * Cancel Home Service Request
+    * */
     public void cancelHomeServiceRequest(final String doctorId, final ICallback callback) {
         mReference.child(AFModel.database)
                 .child(AFModel.home_service)
@@ -548,4 +552,41 @@ public class AppFirebase {
                 });
     }
 
+    /*
+    * Load Home Services
+    * */
+    public void loadHomeService(final ICallback callback) {
+        mReference.child(AFModel.database)
+                .child(AFModel.home_service)
+                .child(getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            List<HomeService> homeServices = new ArrayList<>();
+
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                HomeService homeService = snapshot.getValue(HomeService.class);
+                                if (homeService != null) {
+                                    homeService.setDoctor_id(snapshot.getKey());
+                                    homeServices.add(homeService);
+                                }
+                            }
+
+                            if (homeServices.size() > 0) {
+                                callback.onCallback(true, homeServices);
+                            } else {
+                                callback.onCallback(false, null);
+                            }
+                        } else {
+                            callback.onCallback(false, null);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
 }
