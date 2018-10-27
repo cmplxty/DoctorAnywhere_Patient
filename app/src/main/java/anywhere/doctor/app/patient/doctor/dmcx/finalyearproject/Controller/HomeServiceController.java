@@ -47,7 +47,7 @@ public class HomeServiceController {
         value.put(AFModel.hs_variables.doctor_time, dtime);
         value.put(AFModel.hs_variables.patient_address, paddress);
         value.put(AFModel.hs_variables.patient_phone, pphone);
-        value.put(AFModel.hs_variables.patinet_name, pname);
+        value.put(AFModel.hs_variables.patient_name, pname);
 
         Map<String, Object> map = new HashMap<>();
         map.put( did + "/" + pid, value);

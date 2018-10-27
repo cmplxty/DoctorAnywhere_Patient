@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,94 +18,90 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
+        android:id="@+id/closeIB"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/imageview"
-        android:src="@drawable/cross_cyan_dk"
+        android:src="@drawable/cross_cyan_md"
+        app:layout_constraintBottom_toBottomOf="@+id/newApptTV"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/newApptTV" />
 
-    <EditText
-        android:id="@+id/nameET"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/nameTV"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:hint="Enter Name"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:text="Patient Name"
+        android:textAlignment="viewStart"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/phoneTV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newApptTV" />
 
-    <EditText
-        android:id="@+id/phoneET"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/phoneTV"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:hint="Phone No."
-        android:inputType="text"
+        android:layout_marginTop="24dp"
+        android:text="091023891123"
+        android:textAlignment="viewEnd"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameET" />
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toEndOf="@+id/nameTV"
+        app:layout_constraintTop_toBottomOf="@+id/newApptTV" />
 
-    <EditText
-        android:id="@+id/dateET"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/dateTV"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:hint="Enter Date"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Date: 15 OCT 2018"
+        android:textAlignment="viewStart"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/timeTV"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneET" />
+        app:layout_constraintTop_toBottomOf="@+id/phoneTV" />
 
-    <EditText
-        android:id="@+id/timeET2"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/timeTV"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:hint="Enter Time"
-        android:inputType="text"
+        android:text="Consult: 4 PM - 8 PM"
+        android:textAlignment="viewEnd"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateET" />
-
-    <EditText
-        android:id="@+id/rimainderTimeET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:hint="Remind At"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeET2" />
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toEndOf="@+id/dateTV"
+        app:layout_constraintTop_toBottomOf="@+id/phoneTV" />
 
     <Button
+        android:id="@+id/saveApptBTN"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/btn_style_cyan"
-        android:text="Save Appointment"
+        android:text="Set Appointment"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rimainderTimeET" />
+        app:layout_constraintTop_toBottomOf="@+id/dateTV" />
 
 </android.support.constraint.ConstraintLayout>

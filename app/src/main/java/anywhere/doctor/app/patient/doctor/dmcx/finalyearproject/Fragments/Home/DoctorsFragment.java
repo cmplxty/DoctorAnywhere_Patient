@@ -29,7 +29,6 @@ public class DoctorsFragment extends Fragment {
 
     // Variables
     private RecyclerView doctorsRV;
-    private EditText searchForDoctorET;
 
     private DoctorsRecyclerViewAdapter doctorsRecyclerViewAdapter;
     private List<Doctor> doctors;
@@ -38,7 +37,6 @@ public class DoctorsFragment extends Fragment {
     // Methods
     private void init(View view) {
         doctorsRV = view.findViewById(R.id.doctorsRV);
-        searchForDoctorET = view.findViewById(R.id.searchForDoctorET);
 
         doctorsRV.setLayoutManager(new LinearLayoutManager(HomeActivity.instance));
         doctorsRV.setHasFixedSize(true);

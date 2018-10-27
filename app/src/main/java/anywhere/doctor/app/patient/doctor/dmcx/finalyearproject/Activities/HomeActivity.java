@@ -150,10 +150,12 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (Vars.currentFragment.getTag().equals(FragmentNames.Dashboard)) {
+        if (Vars.currentFragment.getTag() != null && Vars.currentFragment.getTag().equals(FragmentNames.Dashboard)) {
             super.onBackPressed();
+        } else if(Vars.currentFragment.getTag() != null && Vars.currentFragment.getTag().equals(FragmentNames.ProfileEdit)) {
+            loadFragment(TitleText.Profile, new ProfileFragment(), FragmentNames.Profile);
         } else {
-            loadFragment(TitleText.Dashboard, new DashboardFragment(), DashboardFragment.TAG);
+            loadFragment(TitleText.Dashboard, new DashboardFragment(), FragmentNames.Dashboard);
         }
     }
 }

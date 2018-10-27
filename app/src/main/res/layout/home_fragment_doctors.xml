@@ -20,36 +20,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/searchForDoctorET"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/doctor_search_bar_layout"
-        android:drawableEnd="@drawable/search_cyan_dk"
-        android:inputType="text"
-        android:paddingBottom="8dp"
-        android:paddingEnd="10dp"
-        android:paddingStart="15dp"
-        android:paddingTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/allApptTV"
-        tools:ignore="LabelFor" />
-
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/doctorsRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginStart="11dp"
         android:layout_marginTop="8dp"
+        android:paddingBottom="50dp"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchForDoctorET" />
+        app:layout_constraintTop_toBottomOf="@+id/allApptTV" />
 
 </android.support.constraint.ConstraintLayout>

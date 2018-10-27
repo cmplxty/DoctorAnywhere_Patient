@@ -72,6 +72,7 @@
     <string name="female">Gender: Female</string>
     <string name="prescription_cap">PRESCRIPTION</string>
     <string name="prescription_image">Prescription Image</string>
+    <string name="appointment_cap">APPOINTMENT</string>
 
     <string-array name="nurse_array">
         <item>Old</item>
@@ -80,5 +81,10 @@
         <item>Female</item>
         <item>Hourly</item>
         <item>Monthly</item>
+    </string-array>
+
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
 </resources>

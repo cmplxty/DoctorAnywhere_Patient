@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Parcelable;
 
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Appointment.DoctorListAppointmentActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.HomeService.DoctorListHomeServiceActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.HomeService.HomeServiceListActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Messenger.DoctorsListMessageActivity;
@@ -13,6 +14,7 @@ import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Messe
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Messenger.MessageActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Nurse.NurseActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Prescription.PrescriptionListActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Adapter.DoctorListAppointmentRecyclerViewAdapter;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
 
@@ -103,13 +105,31 @@ public class ActivityTrigger {
         activity.startActivity(intent);
     }
 
-
     /*
      * Home Service List Activity
      * */
     public static void HomeServiceListActivity() {
         Activity activity = RefActivity.refACActivity.get();
         Intent intent = new Intent(activity, HomeServiceListActivity.class);
+        activity.startActivity(intent);
+    }
+
+    /*
+     * Home Service List Activity
+     * */
+    public static void DoctorListAppointmentActivity() {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, DoctorListAppointmentActivity.class);
+        activity.startActivity(intent);
+    }
+
+    /*
+    * Doctor Profile
+    * */
+    public static void DoctorProfileActivity(Parcelable parcelable) {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, DoctorProfileActivity.class);
+        intent.putExtra(Vars.Connector.DOCTOR_PROFILE_ACTIVITY_DATA, parcelable);
         activity.startActivity(intent);
     }
 }

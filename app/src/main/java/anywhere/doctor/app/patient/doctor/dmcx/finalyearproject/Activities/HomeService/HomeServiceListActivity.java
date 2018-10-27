@@ -4,7 +4,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -101,11 +100,11 @@ public class HomeServiceListActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == Vars.RequeseCode.REQUEST_CALL_CODE_HS) {
+        if (requestCode == Vars.RequestCode.REQUEST_CALL_CODE_HS) {
             if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 iCallDoctor.call();
             } else {
-                Toast.makeText(RefActivity.refACActivity.get(), ErrorText.PermissionNeededToCallDoctor, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RefActivity.refACActivity.get(), ErrorText.PermissionNeedToCallDoctor, Toast.LENGTH_SHORT).show();
             }
         }
     }

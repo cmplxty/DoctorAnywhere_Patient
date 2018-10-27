@@ -40,7 +40,6 @@ public class DoctorsListHomeServiceRecyclerViewAdapter extends RecyclerView.Adap
 
     @Override
     public void onBindViewHolder(@NonNull DoctorsListHomeServiceRecyclerViewHolder holder, int position) {
-
         final int itemPosition = position;
 
         holder.doctorsNameLDHS.setText(hsdoctors.get(position).getName());

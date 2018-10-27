@@ -7,7 +7,7 @@ public class Doctor implements Parcelable {
 
     private String id;
     private String about;
-    private String chember;
+    private String chamber;
     private String city;
     private String country;
     private String degree;
@@ -26,7 +26,7 @@ public class Doctor implements Parcelable {
     protected Doctor(Parcel in) {
         id = in.readString();
         about = in.readString();
-        chember = in.readString();
+        chamber = in.readString();
         city = in.readString();
         country = in.readString();
         degree = in.readString();
@@ -76,8 +76,8 @@ public class Doctor implements Parcelable {
         return name;
     }
 
-    public String getChember() {
-        return chember;
+    public String getChamber() {
+        return chamber;
     }
 
     public String getDegree() {
@@ -121,7 +121,7 @@ public class Doctor implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(id);
         parcel.writeString(about);
-        parcel.writeString(chember);
+        parcel.writeString(chamber);
         parcel.writeString(city);
         parcel.writeString(country);
         parcel.writeString(degree);

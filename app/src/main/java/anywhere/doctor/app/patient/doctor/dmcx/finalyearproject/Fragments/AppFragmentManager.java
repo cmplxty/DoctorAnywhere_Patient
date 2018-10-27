@@ -2,6 +2,7 @@ package anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
@@ -20,5 +21,10 @@ public class AppFragmentManager {
                 .commit();
 
         Vars.currentFragment = fragment;
+    }
+
+    public static void replace (AppCompatActivity appCompatActivity, int container, Fragment fragment, String tag, Bundle bundle) {
+        fragment.setArguments(bundle);
+        replace(appCompatActivity, container, fragment, tag);
     }
 }

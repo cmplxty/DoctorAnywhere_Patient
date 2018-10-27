@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +29,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.ProfileController;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Manifest;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.APDoctor;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.APRequest;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Doctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.HSDoctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.HomeService;
@@ -586,6 +591,185 @@ public class AppFirebase {
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                    }
+                });
+    }
+
+    /*
+    * Load Appointment Doctors
+    * */
+    public void loadAppointmentDoctors(final ICallback callback) {
+        mReference.child(AFModel.database)
+                .child(AFModel.appointment_doctor)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            List<APDoctor> apDoctors = new ArrayList<>();
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                APDoctor apDoctor = snapshot.getValue(APDoctor.class);
+                                if (apDoctor != null)  {
+                                    apDoctor.setId(snapshot.getKey());
+                                    apDoctors.add(apDoctor);
+                                }
+                            }
+
+                            if (apDoctors.size() > 0)
+                                callback.onCallback(true, apDoctors);
+                            else
+                                callback.onCallback(false, null);
+                        } else {
+                            callback.onCallback(false, null);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    /*
+    * Save Patient Appointment Request
+    * */
+    public void saveAppointmentRequest(Map<String, Object> map, final ICallback callback) {
+        mReference.child(AFModel.database)
+                .child(AFModel.appointment)
+                .updateChildren(map)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        callback.onCallback(task.isSuccessful(), null);
+                    }
+                });
+
+    }
+
+    /*
+    * Check Appointment Sent
+    * */
+    public void checkAppointmentSent(final String doctorId, final ICallback callback) {
+        mReference.child(AFModel.database)
+                .child(AFModel.appointment)
+                .child(getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            if (dataSnapshot.hasChild(doctorId)) {
+                                callback.onCallback(true, null);
+                            } else {
+                                callback.onCallback(false, null);
+                            }
+                        } else {
+                            callback.onCallback(false, null);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+    }
+
+    public void loadPatientAppointments(final ICallback callback) {
+        mReference.child(AFModel.database)
+                .child(AFModel.appointment)
+                .child(getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            List<APRequest> apRequests = new ArrayList<>();
+
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                APRequest apRequest = snapshot.getValue(APRequest.class);
+                                if (apRequest != null) {
+                                    apRequest.setDoctor_id(snapshot.getKey());
+                                    apRequests.add(apRequest);
+                                }
+                            }
+
+                            if (apRequests.size() > 0) {
+                                callback.onCallback(true, apRequests);
+                            } else {
+                                callback.onCallback(false, null);
+                            }
+                        } else
+                            callback.onCallback(false, null);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    public void deletePatientAppointment(final String doctorId, final ICallback callback) {
+        mReference.child(AFModel.database)
+                .child(AFModel.appointment)
+                .child(getCurrentUser().getUid())
+                .child(doctorId)
+                .removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        mReference.child(AFModel.database)
+                                .child(AFModel.appointment)
+                                .child(doctorId)
+                                .child(getCurrentUser().getUid())
+                                .removeValue()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        callback.onCallback(task.isSuccessful(), null);
+                                    }
+                                });
+                    }
+                });
+    }
+
+    /*
+    * Upload Profile Pic
+    * */
+    public void uploadProfileImage(final Uri image, final ICallback callback) {
+        final StorageReference uploadImage = mStorage.child(AFModel.profile_image).child(getCurrentUser().getUid());
+
+        uploadImage.putFile(image)
+                .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            uploadImage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String url = uri.toString();
+                                    callback.onCallback(true, url);
+                                }
+                            });
+                        } else {
+                            callback.onCallback(false, null);
+                        }
+                    }
+                });
+    }
+
+    /*
+    * Update Profile Detail
+    * */
+    public void updatePatientProfile(Map<String, Object> map, final ICallback callback) {
+        mReference.child(AFModel.database)
+                .child(AFModel.patient)
+                .child(getCurrentUser().getUid())
+                .updateChildren(map)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        callback.onCallback(task.isSuccessful(), null);
                     }
                 });
     }

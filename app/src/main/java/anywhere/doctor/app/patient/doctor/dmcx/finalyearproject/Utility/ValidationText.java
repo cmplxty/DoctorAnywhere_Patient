@@ -16,4 +16,9 @@ public class ValidationText {
     public static final String NoMessagesFound = "No messages found.";
     public static final String RequestSent = "Request Sent.";
     public static final String RequestCanceled = "Request Canceled.";
+    public static final String AppointmentSent = "Appontment Sent";
+    public static final String YouAreAbleToCallAfterAccept = "You are able to call after acceptance.";
+    public static final String YouAreAbleToDeleteAfterAcceptOrCancel = "You are able to delete after accept or cancel.";
+    public static final String AppointmentDeleted = "Appointment Deleted.";
+    public static final String UpdateSuccessful = "Update Successful.";
 }

@@ -23,11 +23,13 @@ public class ServiceFragment extends Fragment {
 
     private Button messageServiceBTN;
     private Button homeServiceBTN;
+    private Button apptBTN;
     // Variables
 
     // Methods
     private void init(View view) {
         messageServiceBTN = view.findViewById(R.id.messageServiceBTN);
+        apptBTN = view.findViewById(R.id.apptBTN);
         homeServiceBTN = view.findViewById(R.id.homeServiceBTN);
     }
 
@@ -43,6 +45,13 @@ public class ServiceFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ActivityTrigger.DoctorListHomeServiceActivity();
+            }
+        });
+
+        apptBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityTrigger.DoctorListAppointmentActivity();
             }
         });
     }

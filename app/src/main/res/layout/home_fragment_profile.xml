@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/patientProfilePicIV"
+        android:id="@+id/patientProfilePicCIV"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginEnd="8dp"
@@ -40,7 +40,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patientProfilePicIV" />
+        app:layout_constraintTop_toBottomOf="@+id/patientProfilePicCIV" />
 
     <TextView
         android:id="@+id/patientWelcomeNoteTV"
@@ -101,28 +101,15 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/patientPaymentIV"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/edit_profile"
-                    android:contentDescription="@string/payment_image"
-                    android:padding="5dp"
-                    android:src="@drawable/card_black"
-                    app:layout_constraintEnd_toStartOf="@+id/patientEditProfileIV"
-                    app:layout_constraintTop_toTopOf="@+id/patientEditProfileIV" />
-
                 <!-- Upper -->
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/detailCL"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_marginTop="48dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.496"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@+id/patientEditProfileIV">
 
                     <ImageView
                         android:id="@+id/mailIV"

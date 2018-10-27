@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,7 +48,7 @@ public class HomeServiceListRecyclerViewAdapter extends RecyclerView.Adapter<Hom
     private boolean checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.checkSelfPermission(RefActivity.refACActivity.get(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                RefActivity.refACActivity.get().requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, Vars.RequeseCode.REQUEST_CALL_CODE_HS);
+                RefActivity.refACActivity.get().requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, Vars.RequestCode.REQUEST_CALL_CODE_HS);
                 return false;
             }
         }
