@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.os.Parcelable;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Appointment.DoctorListAppointmentActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.AudioCall.AudioCallActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.AudioCall.DoctorListAudioCallActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Blog.BlogActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Blog.BlogViewerActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.HomeService.DoctorListHomeServiceActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.HomeService.HomeServiceListActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Messenger.DoctorsListMessageActivity;
@@ -19,6 +23,15 @@ import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivi
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
 
 public class ActivityTrigger {
+
+    /*
+    * Auth Activity
+    * */
+    public static void AuthActivity() {
+        Activity activity = RefActivity.refACActivity.get();
+        activity.startActivity(new Intent(RefActivity.refACActivity.get(), AuthActivity.class));
+        activity.finish();
+    }
 
     /*
     * Message Activity
@@ -115,7 +128,7 @@ public class ActivityTrigger {
     }
 
     /*
-     * Home Service List Activity
+     * Appointment List Activity
      * */
     public static void DoctorListAppointmentActivity() {
         Activity activity = RefActivity.refACActivity.get();
@@ -130,6 +143,43 @@ public class ActivityTrigger {
         Activity activity = RefActivity.refACActivity.get();
         Intent intent = new Intent(activity, DoctorProfileActivity.class);
         intent.putExtra(Vars.Connector.DOCTOR_PROFILE_ACTIVITY_DATA, parcelable);
+        activity.startActivity(intent);
+    }
+
+    /*
+     * Audio Call List Activity
+     * */
+    public static void DoctorListAudioCallctivity() {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, DoctorListAudioCallActivity.class);
+        activity.startActivity(intent);
+    }
+
+    /*
+     * Audio Call Activity
+     * */
+    public static void AudioCallActivity(Parcelable parcelable) {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, AudioCallActivity.class);
+        intent.putExtra(Vars.Connector.AUDIO_CALL_ACTIVITY_DATA, parcelable);
+        activity.startActivity(intent);
+    }
+
+    /*
+     * Blog Activity
+     * */
+    public static void BlogActivity() {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, BlogActivity.class);
+        activity.startActivity(intent);
+    }
+
+    /*
+     * Blog Viewer Activity
+     * */
+    public static void BlogViewerActivity() {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, BlogViewerActivity.class);
         activity.startActivity(intent);
     }
 }

@@ -1,7 +1,10 @@
 package anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Firebase;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -10,11 +13,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -29,19 +35,22 @@ import java.util.Objects;
 import java.util.UUID;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.ProfileController;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Manifest;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.LocalDatabase.LDBModel;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.ACDoctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.APDoctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.APRequest;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Blog;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Doctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.HSDoctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.HomeService;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Message;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.MessageUser;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Nurse;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Patient;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Prescription;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.ErrorText;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.ValidationText;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
 
 public class AppFirebase {
 
@@ -69,6 +78,23 @@ public class AppFirebase {
     }
 
     /*
+     * Set Token Id
+     * */
+    public void setTokenId() {
+        if (getCurrentUser() != null) {
+            Map<String, Object> map = new HashMap<>();
+            map.put(AFModel.token_id, FirebaseInstanceId.getInstance().getToken());
+
+            mReference.child(AFModel.database)
+                    .child(AFModel.notification)
+                    .child(AFModel.token)
+                    .child(getCurrentUser().getUid())
+                    .updateChildren(map);
+        }
+    }
+
+
+    /*
     * Get Push Id
     * */
     public String getPushId() {
@@ -83,10 +109,8 @@ public class AppFirebase {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 try {
-                    callback.onCallback(task.isSuccessful(),
-                            task.getException() == null ? null : Objects.requireNonNull(task.getException()).getMessage());
+                    callback.onCallback(task.isSuccessful(), task.getException() == null ? null : Objects.requireNonNull(task.getException()).getMessage());
                 } catch (Exception ex) {
-                    // Exception Callback
                     callOnErrorOccured(ErrorText.ErrorServiceBlocked);
                 }
             }
@@ -196,18 +220,19 @@ public class AppFirebase {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        boolean isDoctorExists = false;
                         List<Doctor> doctors = new ArrayList<>();
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Doctor doctor = snapshot.getValue(Doctor.class);
                             if (doctor != null) {
                                 doctor.setId(snapshot.getKey());
                                 doctors.add(doctor);
-                                isDoctorExists = true;
                             }
                         }
 
-                        callback.onCallback(isDoctorExists, doctors);
+                        if (doctors.size() > 0)
+                            callback.onCallback(true, doctors);
+                        else
+                            callback.onCallback(false, null);
                     }
 
                     @Override
@@ -260,7 +285,9 @@ public class AppFirebase {
                                     mainMap.put(dToUserId + "/" + getPushId(), map);
 
                                     Map<String, Object> userMessageMap = new HashMap<>();
+                                    userMessage.put(AFModel.notification_status, AFModel.viewed);
                                     userMessageMap.put(pFromUserId + "/" + dToUserId, userMessage);
+                                    userMessage.put(AFModel.notification_status, AFModel.not_viewed);
                                     userMessageMap.put(dToUserId + "/" + pFromUserId, userMessage);
 
                                     saveMessage(mainMap, userMessageMap, callback);
@@ -766,6 +793,215 @@ public class AppFirebase {
                 .child(AFModel.patient)
                 .child(getCurrentUser().getUid())
                 .updateChildren(map)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        callback.onCallback(task.isSuccessful(), null);
+                    }
+                });
+    }
+
+    /*
+    * Load All Nurses
+    * */
+    public void loadNurses(final ICallback callback) {
+        mReference.child(AFModel.database)
+                .child(AFModel.nurse)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            List<Nurse> nurses = new ArrayList<>();
+
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                Nurse nurse = snapshot.getValue(Nurse.class);
+
+                                if (nurse != null) {
+                                    if (nurse.getStatus().equals(AFModel.free)) {
+                                        nurse.setId(snapshot.getKey());
+                                        nurses.add(nurse);
+                                    }
+                                }
+                            }
+
+                            if (nurses.size() > 0)
+                                callback.onCallback(true, nurses);
+                            else
+                                callback.onCallback(false, null);
+                        } else
+                            callback.onCallback(false, null);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    /*
+    * Load All Audio Call Doctors
+    * */
+    public void loadAllAudioCallDoctors(final List<Doctor> doctors, final ICallback callback) {
+        mReference.child(AFModel.database)
+                .child(AFModel.audio_call_doctor)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            final List<ACDoctor> acDoctors = new ArrayList<>();
+
+                            for (Doctor doctor : doctors) {
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    final String status = snapshot.child(AFModel.audio_call_status).getValue(String.class);
+                                    if (status != null) {
+                                        if (status.equals(AFModel.online)) {
+                                            if (snapshot.getKey() != null) {
+                                                if (doctor.getId().equals(snapshot.getKey())) {
+                                                    ACDoctor acDoctor = new ACDoctor();
+                                                    acDoctor.setDoctor(doctor);
+                                                    acDoctor.setAudio_call_status(status);
+                                                    acDoctors.add(acDoctor);
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+
+                            if (acDoctors.size() > 0) {
+                                callback.onCallback(true, acDoctors);
+                            }
+                            else
+                                callback.onCallback(false, null);
+                        } else {
+                            callback.onCallback(false, null);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    /*
+    * Send Call Notification To Doctor
+    * */
+    public void sendAudioCallNotification(String patientId, String doctorId, String patientName, final ICallback callback) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(AFModel.timestamp, String.valueOf(System.currentTimeMillis()));
+        map.put(AFModel.type, AFModel.audio_call);
+        map.put(AFModel.title, "Call");
+        map.put(AFModel.content, "A new call from " + patientName);
+        map.put(AFModel.doctor_id, doctorId);
+        map.put(AFModel.patient_id, patientId);
+        map.put(AFModel.device_id, Vars.localDB.retriveString(LDBModel.SAVE_DEVICE_ID));
+
+        mReference.child(AFModel.database)
+                .child(AFModel.notification)
+                .child(AFModel.content)
+                .child(doctorId)
+                .push()
+                .updateChildren(map)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        callback.onCallback(task.isSuccessful(), null);
+                    }
+                });
+
+    }
+
+    /*
+     * Load Last Blog Content
+     * */
+    public void loadLastBlog(final ICallback callback) {
+        mReference.child(AFModel.database)
+                .child(AFModel.blog)
+                .orderByChild(AFModel.timestamp)
+                .limitToLast(1)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            Blog blog = dataSnapshot.getValue(Blog.class);
+                            if (blog != null) {
+                                blog.setId(dataSnapshot.getKey());
+                                callback.onCallback(true, blog);
+                            } else {
+                                callback.onCallback(false, null);
+                            }
+                        } else {
+                            callback.onCallback(false, null);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+    }
+
+    /*
+     * Load All Blog Content
+     * */
+    public void loadAllBlogs(final ICallback callback) {
+        mReference.child(AFModel.database)
+                .child(AFModel.blog)
+                .orderByChild(AFModel.timestamp)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            List<Blog> blogs = new ArrayList<>();
+
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                Blog blog = snapshot.getValue(Blog.class);
+                                if (blog != null) {
+                                    blog.setId(snapshot.getKey());
+                                    blogs.add(blog);
+                                }
+                            }
+
+                            if (blogs.size() > 0)
+                                callback.onCallback(true, blogs);
+                            else
+                                callback.onCallback(false, null);
+                        } else {
+                            callback.onCallback(false, null);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    /*
+    * Set Current Device Id
+    * */
+    @SuppressLint("HardwareIds")
+    public void setAudioCallDeviceId(final ICallback callback) {
+        String deviceId = Vars.localDB.retriveString(LDBModel.SAVE_DEVICE_ID);
+        if (deviceId.equals("")) {
+            deviceId = Settings.Secure.getString(RefActivity.refACActivity.get().getContentResolver(), Settings.Secure.ANDROID_ID);
+        }
+
+        Map<String, Object> map = new HashMap<>();
+        map.put(AFModel.device_id, deviceId);
+        map.put(AFModel.timestamp, String.valueOf(System.currentTimeMillis()));
+
+        mReference.child(AFModel.database)
+                .child(AFModel.audio_call_device)
+                .child(getCurrentUser().getUid())
+                .setValue(map)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

@@ -21,4 +21,5 @@ public class ValidationText {
     public static final String YouAreAbleToDeleteAfterAcceptOrCancel = "You are able to delete after accept or cancel.";
     public static final String AppointmentDeleted = "Appointment Deleted.";
     public static final String UpdateSuccessful = "Update Successful.";
+    public static final String FailedToStoreDeviceId = "Failed to store device id.";
 }

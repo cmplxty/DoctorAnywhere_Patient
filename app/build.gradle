@@ -19,6 +19,7 @@ android {
 }
 
 dependencies {
+    implementation (name: 'sinch-android-rtc', version: '+', ext: 'aar')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
     //noinspection GradleCompatible

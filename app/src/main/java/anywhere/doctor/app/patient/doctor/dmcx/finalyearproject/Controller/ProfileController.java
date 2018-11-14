@@ -37,12 +37,16 @@ public class ProfileController {
                     action.onCompleteAction(errorCode);
                 } else if (object instanceof DataSnapshot) {
                     if (isSuccessful) {
-                        Patient patient = ((DataSnapshot) object).getValue(Patient.class);
-                        Gson gson = new Gson();
-                        String patientJson = gson.toJson(patient);
+                        DataSnapshot snapshot = ((DataSnapshot) object);
+                        Patient patient = snapshot.getValue(Patient.class);
+                        if (patient != null) {
+                            patient.setId(snapshot.getKey());
+                            Gson gson = new Gson();
+                            String patientJson = gson.toJson(patient);
 
-                        Vars.localDB.saveString(LDBModel.SAVE_PATIENT_PROFILE, patientJson);
-                        action.onCompleteAction(patient);
+                            Vars.localDB.saveString(LDBModel.SAVE_PATIENT_PROFILE, patientJson);
+                            action.onCompleteAction(patient);
+                        }
                     }
                 }
             }

@@ -23,7 +23,7 @@
             android:layout_marginTop="12dp"
             android:text="Dr. Jhon Doe"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="15sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/apptCancelIB"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -76,24 +76,27 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginEnd="12dp"
+            android:layout_marginTop="12dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/imageview"
             android:src="@drawable/phone_cyan_dk"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/apptCancelIB"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
         <ImageButton
             android:id="@+id/apptCancelIB"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="12dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/imageview"
             android:src="@drawable/cancel_cyan_dk"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/apptPhoneIB"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/apptPhoneIB" />
 
         <ImageButton
             android:id="@+id/apptTrashIB"

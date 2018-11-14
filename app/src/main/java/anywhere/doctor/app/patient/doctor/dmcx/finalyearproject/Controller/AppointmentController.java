@@ -36,8 +36,8 @@ public class AppointmentController {
         map.put(AFModel.ap_variables.status, AFModel.request);
         map.put(AFModel.ap_variables.doctor_name, apDoctor.getName());
         map.put(AFModel.ap_variables.doctor_clinic, apDoctor.getClinic());
-        map.put(AFModel.ap_variables.doctor_phone, apDoctor.getPhone());
         map.put(AFModel.ap_variables.timestamp, String.valueOf(System.currentTimeMillis()));
+        map.put(AFModel.notification_status, AFModel.not_viewed);
 
         Map<String, Object> mainMap = new HashMap<>();
         mainMap.put(doctorId + "/" + Vars.appFirebase.getCurrentUser().getUid(), map);

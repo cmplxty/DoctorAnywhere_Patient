@@ -6,6 +6,7 @@
 
     <color name="cLightCyan">#1EC8C8</color>
     <color name="cLight_DK1Cyan">#1bb1b1</color>
+    <color name="cLightGrayLow">#83f9f7f7</color>
     <color name="cLightGray">#d7d7d7</color>
     <color name="cBlack">#212121</color>
 </resources>

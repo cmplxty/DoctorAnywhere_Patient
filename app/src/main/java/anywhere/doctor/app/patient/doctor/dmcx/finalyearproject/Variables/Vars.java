@@ -7,6 +7,8 @@ import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.LocalDatabase.Lo
 
 public class Vars {
 
+    public static String deviceId;
+
     public static Fragment currentFragment;
     public static AppFirebase appFirebase;
     public static LocalDB localDB;
@@ -21,11 +23,12 @@ public class Vars {
     }
 
     public static class Connector {
-        public static final String MESSAGE_ACTIVITY_DATA = "M A D";
-        public static final String VIEW_IMAGE_DATA = "V I D";
-        public static final String PERSCRIPTION_ACTIVITY_DATA = "P A D";
-        public static final String DOCTOR_PROFILE_ACTIVITY_DATA = "D P A D";
-        public static final String PROFILE_EDIT_FRAGMENT_DATA = "P E F D";
+        public static final String MESSAGE_ACTIVITY_DATA            = "M A D";
+        public static final String VIEW_IMAGE_DATA                  = "V I D";
+        public static final String PERSCRIPTION_ACTIVITY_DATA       = "P A D";
+        public static final String DOCTOR_PROFILE_ACTIVITY_DATA     = "D P A D";
+        public static final String PROFILE_EDIT_FRAGMENT_DATA       = "P E F D";
+        public static final String AUDIO_CALL_ACTIVITY_DATA         = "A C A D";
     }
 
     public static class ActivityOverrider {
@@ -40,5 +43,17 @@ public class Vars {
         public static final int REQUEST_CALL_CODE_HS = 1111;
         public static final int REQUEST_CALL_CODE_AP = 1112;
         public static final int REQUEST_ACCESS_IMAGE_CODE_PEF = 1113;
+
+        public static final int REQUEST_FOR_ONLINE_AUDIO_CALL = 1114;
+    }
+
+    public static class Flag {
+        public static boolean IsDashboardLoaded = false;
+    }
+
+    public static class Sinch {
+        public static final String APP_KEY = "76a8749a-b68e-4196-b382-84de8eb133fc";
+        public static final String APP_SECRET = "eWBstQ1CoUCYdGQbjHaYwA==";
+        public static final String ENVIRONMENT = "clientapi.sinch.com";
     }
 }

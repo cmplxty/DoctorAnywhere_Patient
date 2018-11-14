@@ -48,7 +48,10 @@ public class MessageController {
         userMessage.put(AFModel.patient, pFromUserId);
 
         Map<String, Object> userMessageMap = new HashMap<>();
+        userMessage.put(AFModel.notification_status, AFModel.viewed);
         userMessageMap.put(pFromUserId + "/" + dToUserId, userMessage);
+
+        userMessage.put(AFModel.notification_status, AFModel.not_viewed);
         userMessageMap.put(dToUserId + "/" + pFromUserId, userMessage);
 
         Vars.appFirebase.saveMessage(mainMap, userMessageMap, new ICallback() {
@@ -83,6 +86,7 @@ public class MessageController {
         userMessage.put(AFModel.timestamp, AFModel.text);
         userMessage.put(AFModel.doctor, dToUserId);
         userMessage.put(AFModel.patient, pFromUserId);
+        userMessage.put(AFModel.notification_status, AFModel.not_viewed);
 
         Vars.appFirebase.saveImageMessage(imageUri, map, userMessage, pFromUserId, dToUserId, new ICallback() {
             @Override

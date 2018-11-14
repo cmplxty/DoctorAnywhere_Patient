@@ -29,6 +29,8 @@
         android:src="@drawable/nophoto"
         android:background="@color/colorPrimaryDark"
         android:padding="5dp"
+        android:scaleType="centerCrop"
+        android:cropToPadding="true"
         />
 
     <Button

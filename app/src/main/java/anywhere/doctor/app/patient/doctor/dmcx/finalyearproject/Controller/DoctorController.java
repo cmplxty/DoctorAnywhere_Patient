@@ -13,12 +13,7 @@ public class DoctorController {
         Vars.appFirebase.getDoctors(new ICallback() {
             @Override
             public void onCallback(boolean isSuccessful, Object object) {
-                if (isSuccessful) {
-                    List<Doctor> doctors = (List<Doctor>) object;
-                    if (doctors != null && doctors.size() > 0) {
-                        action.onCompleteAction(doctors);
-                    }
-                }
+                action.onCompleteAction(object);
             }
         });
     }

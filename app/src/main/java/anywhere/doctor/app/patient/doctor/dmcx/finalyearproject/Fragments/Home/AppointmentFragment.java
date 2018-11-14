@@ -30,8 +30,6 @@ import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
 
 public class AppointmentFragment extends Fragment {
 
-    public static final String TAG = FragmentNames.Appintment;
-
     // Variables
     private RecyclerView apptRV;
     private TextView noApptTV;
@@ -45,7 +43,7 @@ public class AppointmentFragment extends Fragment {
         apptRV = view.findViewById(R.id.apptRV);
         noApptTV = view.findViewById(R.id.noApptTV);
 
-        apptRV.setLayoutManager(new LinearLayoutManager(HomeActivity.instance));
+        apptRV.setLayoutManager(new LinearLayoutManager(HomeActivity.instance.get()));
         apptRV.setHasFixedSize(true);
 
         appointmentRecyclerViewAdapter = new AppointmentRequestRecyclerViewAdapter();

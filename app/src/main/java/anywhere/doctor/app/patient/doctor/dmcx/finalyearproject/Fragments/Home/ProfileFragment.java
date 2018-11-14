@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.ActivityTrigger;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.AuthActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
@@ -30,11 +31,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
 
-    public static final String TAG = FragmentNames.Profile;
-
     // Variables
     private ImageView patientEditProfileIV;
-
     private CircleImageView patientProfilePicCIV;
     private TextView patientNameTV;
     private TextView patientEmailTV;
@@ -43,8 +41,6 @@ public class ProfileFragment extends Fragment {
     private TextView patientGenderTV;
     private TextView patientDOBTV;
     private TextView patientCountryTV;
-
-    private Button helpBTN;
     private Button signOutBTN;
 
     private Patient patient;
@@ -61,7 +57,6 @@ public class ProfileFragment extends Fragment {
         patientGenderTV = view.findViewById(R.id.patientGenderTV);
         patientDOBTV = view.findViewById(R.id.patientDOBTV);
         patientCountryTV = view.findViewById(R.id.patientCountryTV);
-        helpBTN = view.findViewById(R.id.helpBTN);
         signOutBTN = view.findViewById(R.id.signOutBTN);
     }
 
@@ -79,8 +74,8 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 AuthController.SignOut();
-                startActivity(new Intent(RefActivity.refACActivity.get(), AuthActivity.class));
-                RefActivity.refACActivity.get().finish();
+                Vars.localDB.clearLocalDB();
+                ActivityTrigger.AuthActivity();
             }
         });
     }

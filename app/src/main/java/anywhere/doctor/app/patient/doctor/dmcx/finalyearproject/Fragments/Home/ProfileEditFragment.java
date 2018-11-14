@@ -114,7 +114,7 @@ public class ProfileEditFragment extends Fragment {
         profileCountryPEET.setText(patient.getCountry() == null || patient.getCountry().equals(AFModel.deflt) ? "" : patient.getCountry());
 
         String[] genderArray = getResources().getStringArray(R.array.gender_array);
-        if (patient.getGender().equals(genderArray[1])) {
+        if (patient.getGender() != null && patient.getGender().equals(genderArray[1])) {
             profileGenderPESP.setSelection(1);
         } else {
             profileGenderPESP.setSelection(0);

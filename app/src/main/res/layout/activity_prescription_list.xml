@@ -29,7 +29,6 @@
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingBottom="50dp"
-        android:paddingTop="10dp"
         tools:listitem="@layout/layout_rv_single_prescription"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

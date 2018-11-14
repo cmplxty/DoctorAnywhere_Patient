@@ -11,19 +11,18 @@ public class HomeService {
     private String patient_address;
     private String patient_phone;
     private String patinet_name;
+    private String timestamp;
+    private String notification_status;
 
     public HomeService() {
     }
 
-    public HomeService(String doctor_name, String doctor_location, String doctor_phone, String doctor_specialist, String doctor_time, String patient_address, String patient_phone, String patinet_name) {
-        this.doctor_name = doctor_name;
-        this.doctor_location = doctor_location;
-        this.doctor_phone = doctor_phone;
-        this.doctor_specialist = doctor_specialist;
-        this.doctor_time = doctor_time;
-        this.patient_address = patient_address;
-        this.patient_phone = patient_phone;
-        this.patinet_name = patinet_name;
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public String getNotification_status() {
+        return notification_status;
     }
 
     public String getDoctor_id() {

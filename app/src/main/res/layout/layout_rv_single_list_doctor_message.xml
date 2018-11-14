@@ -1,97 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="2dp">
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/bottomLineRL"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bottom_line_cyan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
+        app:layout_constraintStart_toEndOf="@+id/doctorCptPicIV"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/doctorCptPicIV"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/imageview"
+        android:src="@drawable/noperson"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/constraintLayout4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/doctorCptPicIV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/doctorCptPicIV"
+        app:layout_constraintTop_toTopOf="@+id/doctorCptPicIV">
 
-        <ImageView
-            android:id="@+id/doctorCptPicIV"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/imageview"
-            android:src="@drawable/noperson"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <TextView
+            android:id="@+id/doctorCptNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/doctor_name_sample"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/doctorCptSpecialistTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/doctorCptRatingStarIV"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_marginEnd="2dp"
-            android:contentDescription="@string/rating_star_image"
-            android:src="@drawable/star_cyan_dk"
-            app:layout_constraintBottom_toBottomOf="@+id/doctorCptRatingTV"
-            app:layout_constraintEnd_toStartOf="@+id/doctorCptRatingTV"
-            app:layout_constraintTop_toTopOf="@+id/doctorCptRatingTV" />
-
         <TextView
-            android:id="@+id/doctorCptRatingTV"
+            android:id="@+id/doctorCptSpecialistTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/doctor_rating_sample"
-            android:textSize="14sp"
+            android:text="@string/doctor_specialist_sample"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/doctorCptLocationTV"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/doctorCptNameTV" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/doctorCptLocationTV"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/doctorCptPicIV"
-            app:layout_constraintEnd_toStartOf="@+id/doctorCptRatingStarIV"
-            app:layout_constraintStart_toEndOf="@+id/doctorCptPicIV"
-            app:layout_constraintTop_toTopOf="@+id/doctorCptPicIV"
-            app:layout_constraintVertical_bias="0.0">
-
-            <TextView
-                android:id="@+id/doctorCptNameTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/doctor_name_sample"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/doctorCptSpecialistTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/doctor_specialist_sample"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/doctorCptNameTV" />
-
-            <TextView
-                android:id="@+id/doctorCptLocationTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dhaka_bangladesh"
-                android:textSize="11sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/doctorCptSpecialistTV"
-                tools:ignore="SmallSp" />
-
-        </android.support.constraint.ConstraintLayout>
+            android:text="@string/dhaka_bangladesh"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/doctorCptSpecialistTV"
+            tools:ignore="SmallSp" />
 
     </android.support.constraint.ConstraintLayout>
 
-</android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

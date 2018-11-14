@@ -6,29 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/serviceReuireQsnTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="What service do you require?"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/serviceReuireQsnTV"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
@@ -36,271 +22,254 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <GridLayout
+            <android.support.v7.widget.CardView
+                android:id="@+id/MessageCV"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alignmentMode="alignMargins"
-                android:columnCount="2"
-                android:columnOrderPreserved="false"
-                android:rowCount="4"
-                tools:ignore="UselessParent">
+                android:layout_height="150dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="1dp">
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/MessageCV"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1.5"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="2dp">
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                    <android.support.constraint.ConstraintLayout
+                    <TextView
+                        android:id="@+id/sMessageTitleTV"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Message"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toTopOf="@+id/sDescMessageTV"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/sMessageTitleTV"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:text="Message"
-                            android:textColor="@android:color/black"
-                            android:textSize="22sp"
-                            app:layout_constraintBottom_toTopOf="@+id/sDescMessageTV"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/sDescMessageTV"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:text="You can chat with doctors with small revenue."
-                            android:textColor="@android:color/black"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/sMessageTitleTV" />
-
-                        <Button
-                            android:id="@+id/messageServiceBTN"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/service_btn_alt"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:text="Message"
-                            android:textSize="12sp"
-                            android:textColor="@android:color/black"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
-
-                    </android.support.constraint.ConstraintLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/HomeServiceCV"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1.5"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="2dp">
-
-                    <android.support.constraint.ConstraintLayout
+                    <TextView
+                        android:id="@+id/sDescMessageTV"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="This a text messaging service to patient and doctor. You can get instant service from doctor.  "
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/sMessageTitleTV" />
 
-                        <TextView
-                            android:id="@+id/sHomeServiceTitleTV"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:text="Home Service"
-                            android:textColor="@android:color/black"
-                            android:textSize="22sp"
-                            app:layout_constraintBottom_toTopOf="@+id/sDescHomeServiceTV"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <Button
+                        android:id="@+id/messageServiceBTN"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/service_btn_alt"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Message"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                        <TextView
-                            android:id="@+id/sDescHomeServiceTV"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:text="Request a doctor for Home Service."
-                            android:textColor="@android:color/black"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/sHomeServiceTitleTV" />
+                </android.support.constraint.ConstraintLayout>
 
-                        <Button
-                            android:id="@+id/homeServiceBTN"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/service_btn_alt"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:text="Home Service"
-                            android:textSize="12sp"
-                            android:textColor="@android:color/black"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+            </android.support.v7.widget.CardView>
 
-                    </android.support.constraint.ConstraintLayout>
+            <android.support.v7.widget.CardView
+                android:id="@+id/HomeServiceCV"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="1dp">
 
-                </android.support.v7.widget.CardView>
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/AudioCallCV"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_columnSpan="2"
-                    android:layout_columnWeight="1"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_rowWeight="1.25"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="2dp">
-
-                    <android.support.constraint.ConstraintLayout
+                    <TextView
+                        android:id="@+id/sHomeServiceTitleTV"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Home Service"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toTopOf="@+id/sDescHomeServiceTV"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/sAudioCallTitleTV"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:text="Audio Call"
-                            android:textAlignment="center"
-                            android:textColor="@android:color/black"
-                            android:textSize="22sp"
-                            app:layout_constraintBottom_toTopOf="@+id/sDescAudioCallTV"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/sDescAudioCallTV"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:text="By audio call to doctors, You can describe your problems. The doctor must be online when you call."
-                            android:textAlignment="center"
-                            android:textColor="@android:color/black"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/sAudioCallTitleTV" />
-
-                        <Button
-                            android:id="@+id/audioCallBTN"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/service_btn_alt"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:text="Audio Call"
-                            android:textSize="12sp"
-                            android:textColor="@android:color/black"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
-
-                    </android.support.constraint.ConstraintLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/AppointmentCV"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_columnSpan="2"
-                    android:layout_columnWeight="1"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_rowWeight="1.25"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="2dp">
-
-                    <android.support.constraint.ConstraintLayout
+                    <TextView
+                        android:id="@+id/sDescHomeServiceTV"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="You can apply for home service to the given doctors list. You can get the service after doctor accept your request."
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/sHomeServiceTitleTV" />
 
-                        <TextView
-                            android:id="@+id/sApptTitleTV"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:text="Appointment"
-                            android:textAlignment="center"
-                            android:textColor="@android:color/black"
-                            android:textSize="22sp"
-                            app:layout_constraintBottom_toTopOf="@+id/sDescApptTV"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <Button
+                        android:id="@+id/homeServiceBTN"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/service_btn_alt"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Home Service"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                        <TextView
-                            android:id="@+id/sDescApptTV"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:text="Appoint your favourite doctor and meet him/her at chember free of cost."
-                            android:textAlignment="center"
-                            android:textColor="@android:color/black"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/sApptTitleTV" />
+                </android.support.constraint.ConstraintLayout>
 
-                        <Button
-                            android:id="@+id/apptBTN"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/service_btn_alt"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:text="Appointment"
-                            android:textSize="12sp"
-                            android:textColor="@android:color/black"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+            </android.support.v7.widget.CardView>
 
-                    </android.support.constraint.ConstraintLayout>
+            <android.support.v7.widget.CardView
+                android:id="@+id/AudioCallCV"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="1dp">
 
-                </android.support.v7.widget.CardView>
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            </GridLayout>
+                    <TextView
+                        android:id="@+id/sAudioCallTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Audio Call"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toTopOf="@+id/sDescAudioCallTV"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/sDescAudioCallTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="By audio call to doctors, You can describe your problems. The doctor must be online when you call."
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/sAudioCallTitleTV" />
+
+                    <Button
+                        android:id="@+id/audioCallBTN"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/service_btn_alt"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Audio Call"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/AppointmentCV"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="1dp">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/sApptTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Appointment"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toTopOf="@+id/sDescApptTV"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/sDescApptTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Appoint your favourite doctor and meet him/her at chember free of cost."
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/sApptTitleTV" />
+
+                    <Button
+                        android:id="@+id/apptBTN"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/service_btn_alt"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Appointment"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
 
         </LinearLayout>
 

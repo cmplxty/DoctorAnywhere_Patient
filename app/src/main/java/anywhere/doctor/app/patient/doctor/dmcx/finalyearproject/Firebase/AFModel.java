@@ -14,6 +14,12 @@ public class AFModel {
     public static final String appointment_doctor = "appointment_doctor";
     public static final String appointment = "appointment";
     public static final String profile_image = "profile_image";
+    public static final String nurse = "nurse";
+    public static final String nurse_requests = "nurse_requests";
+    public static final String audio_call_doctor = "audio_call_doctor";
+    public static final String notification = "notification";
+    public static final String blog = "blog";
+    public static final String audio_call_device = "audio_call_device";
 
     public static final String name = "name";
     public static final String email = "email";
@@ -41,8 +47,22 @@ public class AFModel {
     public static final String request = "request";
     public static final String accept = "accept";
     public static final String cancel = "cancel";
+    public static final String notification_status = "notification_status";
+    public static final String not_viewed = "not_viewed";
+    public static final String viewed = "viewed";
+    public static final String free = "free";
+    public static final String audio_call_status = "audio_call_status";
+    public static final String online = "online";
+    public static final String offline = "offline";
+    public static final String audio_call = "audio_call";
+    public static final String doctor_id = "doctor_id";
+    public static final String title = "title";
+    public static final String token = "token";
+    public static final String token_id = "token_id";
+    public static final String device_id = "device_id";
 
     public static final String deflt = "defaultx01";
+    public static final String patient_id = "patient_id";
 
     public static class hs_variables {
         public static final String doctor_name = "doctor_name";
@@ -53,6 +73,7 @@ public class AFModel {
         public static final String patient_address = "patient_address";
         public static final String patient_phone = "patient_phone";
         public static final String patient_name = "patient_name";
+        public static final String timestamp = "timestamp";
     }
 
     public static class ap_variables {

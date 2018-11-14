@@ -11,9 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.ActivityTrigger;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Doctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
@@ -21,17 +25,19 @@ import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
 public class DoctorsRecyclerViewAdapter extends RecyclerView.Adapter<DoctorsRecyclerViewAdapter.DoctorsRecyclerViewHolder> {
 
     private List<Doctor> doctors;
-    private Context context;
 
-    public DoctorsRecyclerViewAdapter(Context context, List<Doctor> doctors) {
-        this.context = context;
+    public DoctorsRecyclerViewAdapter() {
+        doctors = new ArrayList<>();
+    }
+
+    public void setDoctors(List<Doctor> doctors) {
         this.doctors = doctors;
     }
 
     @NonNull
     @Override
     public DoctorsRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_rv_single_doctor, parent, false);
+        View view = LayoutInflater.from(RefActivity.refACActivity.get()).inflate(R.layout.layout_rv_single_doctor, parent, false);
         return new DoctorsRecyclerViewHolder(view);
     }
 
@@ -40,8 +46,12 @@ public class DoctorsRecyclerViewAdapter extends RecyclerView.Adapter<DoctorsRecy
 
         final int itemPosition = position;
 
-        // TODO: set doctor picture -> picasso
-        holder.doctorPicIV.setImageResource(R.drawable.noperson);
+        if (!doctors.get(position).getImage_link().equals("")) {
+            Picasso.with(RefActivity.refACActivity.get())
+                    .load(doctors.get(position).getImage_link())
+                    .placeholder(R.drawable.noperson)
+                    .into(holder.doctorPicIV);
+        }
 
         holder.doctorNameTV.setText(doctors.get(itemPosition).getName());
         holder.doctorDegreeTV.setText(doctors.get(itemPosition).getDegree());
@@ -50,7 +60,7 @@ public class DoctorsRecyclerViewAdapter extends RecyclerView.Adapter<DoctorsRecy
         holder.messageDBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Show Payment
+                // TODO: Show Payment -- Optional
                 ActivityTrigger.MessageActivity(doctors.get(itemPosition), Vars.ActivityOverrider.FROM_HOME_ACTIVITY);
             }
         });

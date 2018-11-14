@@ -5,17 +5,17 @@ import android.os.Parcelable;
 
 public class Patient implements Parcelable {
 
-    private String id;
-    private String name;
-    private String email;
-    private String link;
-    private String phone;
-    private String address;
-    private String country;
-    private String gender;
-    private String dob;
-    private String age;
-    private String type;
+    private String id = "";
+    private String name = "";
+    private String email = "";
+    private String link = "";
+    private String phone = "";
+    private String address = "";
+    private String country = "";
+    private String gender = "";
+    private String dob = "";
+    private String age = "";
+    private String type = "";
 
     public Patient() {
     }

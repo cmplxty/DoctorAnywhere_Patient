@@ -93,7 +93,7 @@ public class DoctorListAppointmentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        RefActivity.updateACActivity(HomeActivity.instance);
+        RefActivity.updateACActivity(HomeActivity.instance.get());
         super.onBackPressed();
     }
 

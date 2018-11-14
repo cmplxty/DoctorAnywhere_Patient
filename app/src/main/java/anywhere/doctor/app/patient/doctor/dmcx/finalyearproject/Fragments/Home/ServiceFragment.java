@@ -19,11 +19,10 @@ import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
 public class ServiceFragment extends Fragment {
 
     // Variables
-    public static final String TAG = FragmentNames.Service;
-
     private Button messageServiceBTN;
     private Button homeServiceBTN;
     private Button apptBTN;
+    private Button audioCallBTN;
     // Variables
 
     // Methods
@@ -31,6 +30,7 @@ public class ServiceFragment extends Fragment {
         messageServiceBTN = view.findViewById(R.id.messageServiceBTN);
         apptBTN = view.findViewById(R.id.apptBTN);
         homeServiceBTN = view.findViewById(R.id.homeServiceBTN);
+        audioCallBTN = view.findViewById(R.id.audioCallBTN);
     }
 
     private void event() {
@@ -52,6 +52,13 @@ public class ServiceFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ActivityTrigger.DoctorListAppointmentActivity();
+            }
+        });
+
+        audioCallBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityTrigger.DoctorListAudioCallctivity();
             }
         });
     }

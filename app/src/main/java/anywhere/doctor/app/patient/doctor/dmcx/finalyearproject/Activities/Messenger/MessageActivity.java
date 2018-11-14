@@ -192,13 +192,13 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (fromActivity.equals(Vars.ActivityOverrider.FROM_HOME_ACTIVITY)) {
-            RefActivity.updateACActivity(HomeActivity.instance);
+            RefActivity.updateACActivity(HomeActivity.instance.get());
         } else if (fromActivity.equals(Vars.ActivityOverrider.FROM_MESSAGE_USER_LIST_ACTIVITY)) {
             RefActivity.updateACActivity(MessageUserListActivity.instance);
         } else if (fromActivity.equals(Vars.ActivityOverrider.FROM_DOCTOR_LIST_ACTIVITY)) {
-            RefActivity.updateACActivity(HomeActivity.instance); // TODO: May change in future....
+            RefActivity.updateACActivity(HomeActivity.instance.get()); // TODO: May change in future....
         } else {
-            RefActivity.updateACActivity(HomeActivity.instance);
+            RefActivity.updateACActivity(HomeActivity.instance.get());
         }
 
         super.onBackPressed();

@@ -41,7 +41,7 @@ public class DoctorsListMessageActivity extends AppCompatActivity {
         mLoadingRL = findViewById(R.id.mLoadingRL);
         doctorsListRV = findViewById(R.id.doctorsListRV);
 
-        doctorsListRV.setLayoutManager(new LinearLayoutManager(HomeActivity.instance));
+        doctorsListRV.setLayoutManager(new LinearLayoutManager(HomeActivity.instance.get()));
         doctorsListRV.setHasFixedSize(true);
 
         doctors = new ArrayList<>();
@@ -93,7 +93,7 @@ public class DoctorsListMessageActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        RefActivity.updateACActivity(HomeActivity.instance);
+        RefActivity.updateACActivity(HomeActivity.instance.get());
         super.onBackPressed();
     }
 }

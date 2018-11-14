@@ -6,17 +6,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.victor.loading.rotate.RotateLoading;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Adapter.NurseRecyclerViewAdapter;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.IAction;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.NurseController;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Nurse;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
 
 public class NurseActivity extends AppCompatActivity {
 
     // Variables
     private RecyclerView nurseRV;
+    private RotateLoading mLoadingRL;
 
     private NurseRecyclerViewAdapter nurseRecyclerViewAdapter;
     private List<Nurse> nurses;
@@ -25,24 +31,33 @@ public class NurseActivity extends AppCompatActivity {
     // Methods
     private void init() {
         nurseRV = findViewById(R.id.nurseRV);
+        mLoadingRL = findViewById(R.id.mLoadingRL);
         nurseRV.setHasFixedSize(true);
         nurseRV.setLayoutManager(new LinearLayoutManager(this));
 
+        nurseRecyclerViewAdapter = new NurseRecyclerViewAdapter();
+        nurseRV.setAdapter(nurseRecyclerViewAdapter);
         nurses = new ArrayList<>();
     }
 
     private void loadList() {
-        nurses.add(new Nurse("1", "Marcelo Junior", "Female", "Montly", "", ""));
-        nurses.add(new Nurse("1", "Marcelo Junior", "Female", "Montly", "", ""));
-        nurses.add(new Nurse("1", "Marcelo Junior", "Female", "Montly", "", ""));
-        nurses.add(new Nurse("1", "Marcelo Junior", "Female", "Montly", "", ""));
-        nurses.add(new Nurse("1", "Marcelo Junior", "Female", "Montly", "", ""));
-        nurses.add(new Nurse("1", "Marcelo Junior", "Female", "Montly", "", ""));
-        nurses.add(new Nurse("1", "Marcelo Junior", "Female", "Montly", "", ""));
-        nurses.add(new Nurse("1", "Marcelo Junior", "Female", "Montly", "", ""));
+        mLoadingRL.start();
+        NurseController.LoadNurses(new IAction() {
+            @Override
+            public void onCompleteAction(Object object) {
+                mLoadingRL.stop();
+                nurses = new ArrayList<>();
 
-        nurseRecyclerViewAdapter = new NurseRecyclerViewAdapter(this, nurses);
-        nurseRV.setAdapter(nurseRecyclerViewAdapter);
+                if (object != null) {
+                    for (Object nurse : (List<?>) object) {
+                        nurses.add((Nurse) nurse);
+                    }
+                }
+
+                nurseRecyclerViewAdapter.setNurses(nurses);
+                nurseRecyclerViewAdapter.notifyDataSetChanged();
+            }
+        });
     }
     // Methods
 
@@ -50,11 +65,7 @@ public class NurseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nurse);
-
-        // Initialization
         init();
-
-        // Load Nurse List
         loadList();
     }
 
@@ -64,5 +75,12 @@ public class NurseActivity extends AppCompatActivity {
 
         // Show animation at the starting
 //        overridePendingTransition(R.anim.slide_right_to_position, R.anim.slide_position_to_left);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        nurseRV = null;
     }
 }

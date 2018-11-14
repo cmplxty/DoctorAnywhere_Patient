@@ -48,6 +48,8 @@ public class HomeServiceController {
         value.put(AFModel.hs_variables.patient_address, paddress);
         value.put(AFModel.hs_variables.patient_phone, pphone);
         value.put(AFModel.hs_variables.patient_name, pname);
+        value.put(AFModel.hs_variables.timestamp, String.valueOf(System.currentTimeMillis()));
+        value.put(AFModel.notification_status, AFModel.not_viewed);
 
         Map<String, Object> map = new HashMap<>();
         map.put( did + "/" + pid, value);
