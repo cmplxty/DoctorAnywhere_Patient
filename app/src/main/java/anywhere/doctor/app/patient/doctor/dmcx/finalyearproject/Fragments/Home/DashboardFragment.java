@@ -1,5 +1,6 @@
 package anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Fragments.Home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,10 +18,12 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.ActivityTrigger;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Map.MapActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.PosterImageCallback;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.BlogController;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.IAction;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Fragments.FragmentNames;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.DashboardController;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Blog;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
@@ -34,19 +37,28 @@ public class DashboardFragment extends Fragment {
     private ConstraintLayout blogPageCL;
     private ConstraintLayout bloodPageCL;
     private ConstraintLayout nursePageCL;
-    private ConstraintLayout helpPageCL;
+    private ConstraintLayout mapPageCL;
+    private ConstraintLayout blogMainLayoutDBCL;
+    private ConstraintLayout audioCallHistoryPageCL;
 
     private HorizontalScrollView optionsHorizontalScrollView;
     private ConstraintLayout serviceDBCL;
     private ConstraintLayout blogDBCL;
 
     private ImageView blogPosterDBIV;
-    private TextView blogTitleBTV;
-    private TextView blogDetailDBTV;
+    private TextView blogTitleDBTV;
+    private TextView blogContentDBTV;
     private TextView noBlogFoundDBTV;
-    private ConstraintLayout blogMainLayoutDBCL;
 
+    private TextView newMessageCounterDBTV;
+    private TextView homeServiceCounterDBTV;
+    private TextView appointmentCounterDBTV;
+
+    private Blog blog;
     private LoadUIElementHandler loadUIElementHandler = new LoadUIElementHandler();
+    private LoadUIOptionLayoutRunnable loadUIOptionLayoutRunnable = new LoadUIOptionLayoutRunnable();
+    private LoadUIServiceLayoutRunnable loadUIServiceLayoutRunnable = new LoadUIServiceLayoutRunnable();
+    private LoadUIBlogLayoutRunnable loadUIBlogLayoutRunnable = new LoadUIBlogLayoutRunnable();
     // Variables
 
     // Class
@@ -78,8 +90,14 @@ public class DashboardFragment extends Fragment {
         @Override
         public void run() {
             visibleBlogLayout();
+
+            loadUIElementHandler.removeCallbacks(loadUIOptionLayoutRunnable);
+            loadUIElementHandler.removeCallbacks(loadUIServiceLayoutRunnable);
+            loadUIElementHandler.removeCallbacks(loadUIBlogLayoutRunnable);
         }
     }
+
+
     // Class
 
     // Methods
@@ -88,28 +106,32 @@ public class DashboardFragment extends Fragment {
         prescriptionPageCL = view.findViewById(R.id.prescriptionPageCL);
         blogPageCL = view.findViewById(R.id.blogPageCL);
         bloodPageCL = view.findViewById(R.id.bloodPageCL);
-        helpPageCL = view.findViewById(R.id.helpPageCL);
+        mapPageCL = view.findViewById(R.id.mapPageCL);
         nursePageCL = view.findViewById(R.id.nursePageCL);
         optionsHorizontalScrollView = view.findViewById(R.id.optionsHorizontalScrollView);
         homeServicePageCL = view.findViewById(R.id.homeServicePageCL);
         serviceDBCL = view.findViewById(R.id.serviceDBCL);
         blogDBCL = view.findViewById(R.id.blogDBCL);
         blogPosterDBIV = view.findViewById(R.id.blogPosterDBIV);
-        blogTitleBTV = view.findViewById(R.id.blogTitleBTV);
-        blogDetailDBTV = view.findViewById(R.id.blogDetailDBTV);
+        blogTitleDBTV = view.findViewById(R.id.blogTitleDBTV);
+        blogContentDBTV = view.findViewById(R.id.blogContentDBTV);
         noBlogFoundDBTV = view.findViewById(R.id.noBlogFoundDBTV);
         blogMainLayoutDBCL = view.findViewById(R.id.blogMainLayoutDBCL);
+        newMessageCounterDBTV = view.findViewById(R.id.newMessageCounterDBTV);
+        homeServiceCounterDBTV = view.findViewById(R.id.homeServiceCounterDBTV);
+        appointmentCounterDBTV = view.findViewById(R.id.appointmentCounterDBTV);
+        audioCallHistoryPageCL = view.findViewById(R.id.audioCallHistoryPageCL);
     }
 
     private void task() {
         if (!Vars.Flag.IsDashboardLoaded) {
-            loadUIElementHandler.postDelayed(new LoadUIOptionLayoutRunnable(), 300);
+            loadUIElementHandler.postDelayed(loadUIOptionLayoutRunnable, 400);
         } else {
             visibleOptionsLayout();
         }
 
-        loadUIElementHandler.postDelayed(new LoadUIServiceLayoutRunnable(), 550);
-        loadUIElementHandler.postDelayed(new LoadUIBlogLayoutRunnable(), 650);
+        loadUIElementHandler.postDelayed(loadUIServiceLayoutRunnable, 550);
+        loadUIElementHandler.postDelayed(loadUIBlogLayoutRunnable, 650);
     }
 
     private void event() {
@@ -147,6 +169,36 @@ public class DashboardFragment extends Fragment {
                 ActivityTrigger.BlogActivity();
             }
         });
+
+        blogMainLayoutDBCL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (blog != null)
+                    ActivityTrigger.BlogViewerActivity(Vars.ParentActivity.HOME_ACTIVITY, blog);
+            }
+        });
+
+        bloodPageCL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityTrigger.BloodDonorActivity();
+            }
+        });
+
+        audioCallHistoryPageCL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityTrigger.AudioCallHistoryActivity();
+            }
+        });
+
+        mapPageCL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RefActivity.refACActivity.get(), MapActivity.class);
+                RefActivity.refACActivity.get().startActivity(intent);
+            }
+        });
     }
 
     private void visibleOptionsLayout() {
@@ -174,15 +226,16 @@ public class DashboardFragment extends Fragment {
                 if (object != null) {
                     switchBlogLayout(View.VISIBLE, View.GONE);
 
-                    Blog blog = new Blog();
+                    blog = (Blog) object;
+                    if (!blog.getPoster().equals("")) {
+                        Picasso.with(RefActivity.refACActivity.get())
+                                .load(blog.getPoster())
+                                .placeholder(R.drawable.no_image_available)
+                                .into(blogPosterDBIV, PosterImageCallback.getInstance().setImageView(blogPosterDBIV));
+                    }
 
-                    Picasso.with(RefActivity.refACActivity.get())
-                            .load(blog.getImage_link())
-                            .placeholder(R.drawable.noperson)
-                            .into(blogPosterDBIV);
-
-                    blogTitleBTV.setText(blog.getTitle());
-                    blogDetailDBTV.setText(blog.getContent());
+                    blogTitleDBTV.setText(blog.getTitle());
+                    blogContentDBTV.setText(blog.getContent());
                 } else {
                     switchBlogLayout(View.GONE, View.VISIBLE);
                 }
@@ -193,6 +246,41 @@ public class DashboardFragment extends Fragment {
     private void switchBlogLayout(int i1, int i2) {
         blogMainLayoutDBCL.setVisibility(i1);
         noBlogFoundDBTV.setVisibility(i2);
+    }
+
+    private void loadCounter() {
+        DashboardController.CountNewMessages(new IAction() {
+            @Override
+            public void onCompleteAction(Object object) {
+                counterTextUpdater(object, newMessageCounterDBTV);
+            }
+        });
+
+        DashboardController.CountHomeServices(new IAction() {
+            @Override
+            public void onCompleteAction(Object object) {
+                counterTextUpdater(object, homeServiceCounterDBTV);
+            }
+        });
+
+        DashboardController.CountAcceptedAppointments(new IAction() {
+            @Override
+            public void onCompleteAction(Object object) {
+                counterTextUpdater(object, appointmentCounterDBTV);
+            }
+        });
+    }
+
+    private void counterTextUpdater(Object object, TextView textView) {
+        if (object instanceof Integer) {
+            if ((Integer) object < 9) {
+                textView.setText(String.valueOf(object));
+            } else {
+                textView.setText("*");
+            }
+        } else {
+            textView.setText("0");
+        }
     }
     // Methods
 
@@ -205,7 +293,12 @@ public class DashboardFragment extends Fragment {
         task();
         event();
         loadLastBlog();
+        loadCounter();
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 }

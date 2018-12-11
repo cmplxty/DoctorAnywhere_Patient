@@ -3,6 +3,8 @@ package anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.Validator;
+
 public class Doctor implements Parcelable {
 
     private String id;
@@ -133,5 +135,41 @@ public class Doctor implements Parcelable {
         parcel.writeString(rating);
         parcel.writeString(registration);
         parcel.writeString(specialist);
+    }
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "id='" + id + '\'' +
+                ", about='" + about + '\'' +
+                ", chamber='" + chamber + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", degree='" + degree + '\'' +
+                ", email='" + email + '\'' +
+                ", hospital='" + hospital + '\'' +
+                ", image_link='" + image_link + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", rating='" + rating + '\'' +
+                ", registration='" + registration + '\'' +
+                ", specialist='" + specialist + '\'' +
+                '}';
+    }
+
+    public boolean checkEmptyValues() {
+        return  Validator.empty(about) &&
+                Validator.empty(city) &&
+                Validator.empty(name) &&
+                Validator.empty(phone) &&
+                Validator.empty(email) &&
+                Validator.empty(rating) &&
+                Validator.empty(degree) &&
+                Validator.empty(country) &&
+                Validator.empty(chamber) &&
+                Validator.empty(hospital) &&
+                Validator.empty(specialist) &&
+                Validator.empty(image_link) &&
+                Validator.empty(registration);
     }
 }

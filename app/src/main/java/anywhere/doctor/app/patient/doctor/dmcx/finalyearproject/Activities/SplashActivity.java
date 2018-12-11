@@ -12,29 +12,31 @@ import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        RefActivity.updateACActivity(this);
+    private SplashHandler splashHandlar = new SplashHandler();
 
-        new splashHandler().postDelayed(new splashRunnable(), 1000);
-    }
-
-    private static class splashHandler extends Handler {
+    private static class SplashHandler extends Handler {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public void dispatchMessage(Message msg) {
+            super.dispatchMessage(msg);
         }
     }
 
-    private static class splashRunnable implements Runnable {
+    private class SplashRunnable implements Runnable {
 
         @Override
         public void run() {
             RefActivity.refACActivity.get().startActivity(new Intent(RefActivity.refACActivity.get(), AuthActivity.class));
             RefActivity.refACActivity.get().finish();
         }
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+        RefActivity.updateACActivity(this);
+
+        splashHandlar.postDelayed(new SplashRunnable(), 1000);
     }
 
 }

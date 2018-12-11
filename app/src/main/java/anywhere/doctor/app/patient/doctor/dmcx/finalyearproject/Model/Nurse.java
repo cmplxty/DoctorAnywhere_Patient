@@ -9,12 +9,12 @@ public class Nurse {
     private String address = "";
     private String city = "";
     private String country = "";
-    private String type = ""; // Part/Full Time
+    private String type = "";
     private String image_link = "";
-    private String degree = ""; // Non/Some
+    private String degree = "";
     private String gender = "";
     private String about = "";
-    private String status = ""; // Free/Busy
+    private String status = "";
 
     public Nurse() {
     }

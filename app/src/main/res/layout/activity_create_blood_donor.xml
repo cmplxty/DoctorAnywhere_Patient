@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:title="New Blood Donor"
+            android:theme="@style/Theme.AppCompat"
+            />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="General"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                />
+
+            <EditText
+                android:id="@+id/donorNameDET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:layout_marginTop="8dp"
+                android:hint="Your Name"
+                android:textSize="15sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:background="@drawable/bottom_line_cyan"
+                />
+
+            <EditText
+                android:id="@+id/donorPhoneDET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:layout_marginTop="8dp"
+                android:hint="Your Phone"
+                android:textSize="15sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:background="@drawable/bottom_line_cyan"
+                />
+
+            <EditText
+                android:id="@+id/donorCityDET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginTop="8dp"
+                android:hint="Your City"
+                android:textSize="15sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:background="@drawable/bottom_line_cyan"
+                />
+
+            <Spinner
+                android:id="@+id/donorGenderDSPN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:dropDownWidth="wrap_content"
+                android:entries="@array/gender_array"
+                android:minWidth="200dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:prompt="@string/choose"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Necessary"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="16dp"
+                />
+
+            <EditText
+                android:id="@+id/donorAgeDET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:layout_marginTop="8dp"
+                android:hint="Your Age (16+)"
+                android:textSize="15sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:background="@drawable/bottom_line_cyan"
+                />
+
+            <EditText
+                android:id="@+id/donorWeightDET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:layout_marginTop="8dp"
+                android:hint="Your Weight (50+ kg)"
+                android:textSize="15sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:background="@drawable/bottom_line_cyan"
+                />
+
+            <EditText
+                android:id="@+id/lastDateOfDonationDET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginTop="8dp"
+                android:hint="Last donation date"
+                android:textSize="15sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:background="@drawable/bottom_line_cyan"
+                />
+
+            <Spinner
+                android:id="@+id/donorBloodGroupDSPN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:dropDownWidth="wrap_content"
+                android:entries="@array/blood_group_array"
+                android:minWidth="200dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:prompt="@string/choose"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

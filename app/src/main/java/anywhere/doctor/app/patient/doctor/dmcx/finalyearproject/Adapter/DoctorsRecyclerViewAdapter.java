@@ -60,7 +60,6 @@ public class DoctorsRecyclerViewAdapter extends RecyclerView.Adapter<DoctorsRecy
         holder.messageDBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Show Payment -- Optional
                 ActivityTrigger.MessageActivity(doctors.get(itemPosition), Vars.ActivityOverrider.FROM_HOME_ACTIVITY);
             }
         });

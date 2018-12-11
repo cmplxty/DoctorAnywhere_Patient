@@ -2,16 +2,9 @@ package anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller;
 
 import android.widget.Toast;
 
-import com.google.firebase.database.ThrowOnExtraProperties;
-import com.victor.loading.rotate.RotateLoading;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Firebase.ICallback;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Prescription;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.ICallback;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.ErrorText;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.LoadingDialog;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.LoadingText;

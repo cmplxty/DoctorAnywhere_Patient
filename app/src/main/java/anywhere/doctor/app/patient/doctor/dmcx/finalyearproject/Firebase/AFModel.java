@@ -15,17 +15,21 @@ public class AFModel {
     public static final String appointment = "appointment";
     public static final String profile_image = "profile_image";
     public static final String nurse = "nurse";
-    public static final String nurse_requests = "nurse_requests";
+    public static final String nurse_request = "nurse_request";
     public static final String audio_call_doctor = "audio_call_doctor";
+    public static final String audio_call_history = "audio_call_history";
     public static final String notification = "notification";
     public static final String blog = "blog";
     public static final String audio_call_device = "audio_call_device";
+    public static final String blood_donors = "blood_donors";
+    public static final String blood_posts = "blood_posts";
 
     public static final String name = "name";
     public static final String email = "email";
     public static final String link = "link";
     public static final String phone = "phone";
     public static final String address = "address";
+    public static final String city = "city";
     public static final String country = "country";
     public static final String gender = "gender";
     public static final String dob = "dob";
@@ -60,6 +64,17 @@ public class AFModel {
     public static final String token = "token";
     public static final String token_id = "token_id";
     public static final String device_id = "device_id";
+    public static final String male = "male";
+    public static final String female = "female";
+    public static final String available = "available";
+    public static final String not_available = "not_available";
+    public static final String group = "group";
+    public static final String weight = "weight";
+    public static final String last_donation_date = "last_donation_date";
+    public static final String user_id = "user_id";
+    public static final String description = "description";
+    public static final String received = "received";
+    public static final String missed = "missed";
 
     public static final String deflt = "defaultx01";
     public static final String patient_id = "patient_id";

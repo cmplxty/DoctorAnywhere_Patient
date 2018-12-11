@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -20,13 +19,12 @@ import java.util.List;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.ActivityTrigger;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.IAction;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.PrescriptionController;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Firebase.AFModel;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Message;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Prescription;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.ErrorText;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.FormetterDateTime;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
 
@@ -103,19 +101,21 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<MessageRecy
             imageParams.gravity = Gravity.END;
             generalParams.gravity = Gravity.END;
 
-            holder.messageImage.setBackgroundColor(Color.parseColor("#212121"));
+            holder.messageImage.setBackground(RefActivity.refACActivity.get().getDrawable(R.drawable.message_from));
             holder.messageImage.setLayoutParams(imageParams);
 
-            holder.messageContent.setBackgroundColor(Color.parseColor("#212121"));
+            holder.messageContent.setBackground(RefActivity.refACActivity.get().getDrawable(R.drawable.message_from));
+            holder.messageContent.setTextColor(Color.BLACK);
             holder.messageContent.setLayoutParams(generalParams);
         } else {
             imageParams.gravity = Gravity.START;
             generalParams.gravity = Gravity.START;
 
-            holder.messageImage.setBackgroundColor(Color.parseColor("#1EC8C8"));
+            holder.messageImage.setBackground(RefActivity.refACActivity.get().getDrawable(R.drawable.message_to));
             holder.messageImage.setLayoutParams(imageParams);
 
-            holder.messageContent.setBackgroundColor(Color.parseColor("#1EC8C8"));
+            holder.messageContent.setBackground(RefActivity.refACActivity.get().getDrawable(R.drawable.message_to));
+            holder.messageContent.setTextColor(Color.WHITE);
             holder.messageContent.setLayoutParams(generalParams);
         }
 

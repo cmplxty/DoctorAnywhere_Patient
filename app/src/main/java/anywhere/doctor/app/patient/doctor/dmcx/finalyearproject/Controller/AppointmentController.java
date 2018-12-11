@@ -7,8 +7,9 @@ import java.util.Map;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Firebase.AFModel;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Firebase.ICallback;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.APDoctor;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.ICallback;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.AppointmentDoctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.ErrorText;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.LoadingDialog;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.LoadingText;
@@ -26,7 +27,7 @@ public class AppointmentController {
         });
     }
 
-    public static void SendAppointmentRequest(String name, String phone, String date, String time, String doctorId, APDoctor apDoctor) {
+    public static void SendAppointmentRequest(String name, String phone, String date, String time, String doctorId, AppointmentDoctor appointmentDoctor) {
 
         Map<String, Object> map = new HashMap<>();
         map.put(AFModel.ap_variables.patient_name, name);
@@ -34,8 +35,8 @@ public class AppointmentController {
         map.put(AFModel.ap_variables.date, date);
         map.put(AFModel.ap_variables.time, time);
         map.put(AFModel.ap_variables.status, AFModel.request);
-        map.put(AFModel.ap_variables.doctor_name, apDoctor.getName());
-        map.put(AFModel.ap_variables.doctor_clinic, apDoctor.getClinic());
+        map.put(AFModel.ap_variables.doctor_name, appointmentDoctor.getName());
+        map.put(AFModel.ap_variables.doctor_clinic, appointmentDoctor.getClinic());
         map.put(AFModel.ap_variables.timestamp, String.valueOf(System.currentTimeMillis()));
         map.put(AFModel.notification_status, AFModel.not_viewed);
 

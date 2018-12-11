@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.common.GoogleSignatureVerifier;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.ActivityTrigger;
@@ -19,12 +19,13 @@ import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivi
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Doctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DoctorsListMessageRecyclerViewAdapter extends RecyclerView.Adapter<DoctorsListMessageRecyclerViewAdapter.DoctorsListRecyclerViewHolder> {
 
-    private List<Doctor> doctors;
+    private List<Doctor> doctors = new ArrayList<>();
 
-    public DoctorsListMessageRecyclerViewAdapter(List<Doctor> doctors) {
+    public void setDoctors(List<Doctor> doctors) {
         this.doctors = doctors;
     }
 
@@ -44,7 +45,7 @@ public class DoctorsListMessageRecyclerViewAdapter extends RecyclerView.Adapter<
             Picasso.with(RefActivity.refACActivity.get())
                     .load(doctors.get(position).getImage_link())
                     .placeholder(R.drawable.noperson)
-                    .into(holder.doctorCptPicIV);
+                    .into(holder.doctorCptPicCIV);
         }
 
         holder.doctorCptNameTV.setText(doctors.get(itemPosition).getName());
@@ -71,7 +72,7 @@ public class DoctorsListMessageRecyclerViewAdapter extends RecyclerView.Adapter<
 
     class DoctorsListRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView doctorCptPicIV;
+        private CircleImageView doctorCptPicCIV;
         private TextView doctorCptNameTV;
         private TextView doctorCptSpecialistTV;
         private TextView doctorCptLocationTV;
@@ -80,7 +81,7 @@ public class DoctorsListMessageRecyclerViewAdapter extends RecyclerView.Adapter<
         DoctorsListRecyclerViewHolder(View itemView) {
             super(itemView);
 
-            doctorCptPicIV = itemView.findViewById(R.id.doctorCptPicIV);
+            doctorCptPicCIV = itemView.findViewById(R.id.doctorCptPicCIV);
             doctorCptNameTV = itemView.findViewById(R.id.doctorCptNameTV);
             doctorCptSpecialistTV = itemView.findViewById(R.id.doctorCptSpecialistTV);
             doctorCptLocationTV = itemView.findViewById(R.id.doctorCptLocationTV);

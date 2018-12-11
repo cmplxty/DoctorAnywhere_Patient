@@ -1,52 +1,58 @@
 package anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Adapter;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.victor.loading.rotate.RotateLoading;
 
+import java.security.PrivateKey;
+import java.sql.Ref;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.AppointmentController;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.IAction;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.ProfileController;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Firebase.AFModel;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.APDoctor;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.AppointmentDoctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Appointment;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.ValidationText;
 
 public class DoctorListAppointmentRecyclerViewAdapter extends RecyclerView.Adapter<DoctorListAppointmentRecyclerViewAdapter.DoctorListAppointmentRecyclerViewHolder> implements DatePickerDialog.OnDateSetListener {
 
-    private List<APDoctor> apDoctors = new ArrayList<>();
+    private List<AppointmentDoctor> appointmentDoctors = new ArrayList<>();
     private List<String> gDays = new ArrayList<>();
     private List<String> gTimes = new ArrayList<>();
+    private boolean isPatientSendAppointmentRequest;
     private boolean allowDismissDateDialog;
     private int lastPosition;
-    private boolean isPatientSendAppointmentRequest;
 
-    public void setApDoctors(List<APDoctor> apDoctors) {
-        this.apDoctors = apDoctors;
+    public void setApDoctors(List<AppointmentDoctor> appointmentDoctors) {
+        this.appointmentDoctors = appointmentDoctors;
     }
 
     private int getDay(String day) {
@@ -70,13 +76,13 @@ public class DoctorListAppointmentRecyclerViewAdapter extends RecyclerView.Adapt
         }
     }
 
-    private void setConsultDate(List<String> days) {
+    private void setConsultDate() {
         Calendar calendar = Calendar.getInstance();
 
         DatePickerDialog dateFragment = new DatePickerDialog(
                 RefActivity.refACActivity.get(),
                 R.style.AppTheme_DateTimePicker,
-                DoctorListAppointmentRecyclerViewAdapter.this,
+                this,
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
@@ -105,40 +111,30 @@ public class DoctorListAppointmentRecyclerViewAdapter extends RecyclerView.Adapt
             }
         };
 
-        List<String> spilledDays = new ArrayList<>();
-        for (String day : days) {
-            Collections.addAll(spilledDays, day.split(" "));
-        }
-
-        String formattedDays = "";
-        for (String day : spilledDays) {
-            day = day.toLowerCase().substring(0, 1).toUpperCase().concat(day.toLowerCase().substring(1));
-            if (day.toLowerCase().equals(spilledDays.get(spilledDays.size() - 1).toLowerCase()))
-                formattedDays = formattedDays.concat(day);
-            else
-                formattedDays = formattedDays.concat(day) + " - ";
-        }
         dateFragment.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-        dateFragment.setMessage(new StringBuilder("Days: ").append(formattedDays));
         dateFragment.show();
     }
 
-    private void openAppointmentDialog(final String date, final String time) {
-        View dialogAppointment = LayoutInflater.from(RefActivity.refACActivity.get()).inflate(R.layout.dialog_add_new_appointment, null);
+    private void openAppointmentDialog(final String date, final List<String> times) {
+        View dialogAppointment = LayoutInflater.from(RefActivity.refACActivity.get())
+                .inflate(R.layout.dialog_add_new_appointment, null);
+
         TextView nameTV = dialogAppointment.findViewById(R.id.nameTV);
         TextView phoneTV = dialogAppointment.findViewById(R.id.phoneTV);
         TextView dateTV = dialogAppointment.findViewById(R.id.dateTV);
-        TextView timeTV = dialogAppointment.findViewById(R.id.timeTV);
+        final Spinner timeSPN = dialogAppointment.findViewById(R.id.timeSPN);
         Button saveApptBTN = dialogAppointment.findViewById(R.id.saveApptBTN);
         ImageButton closeIB = dialogAppointment.findViewById(R.id.closeIB);
 
         String phone = ProfileController.GetLocalProfile().getPhone() == null || ProfileController.GetLocalProfile().getPhone().equals(AFModel.deflt)
-                            ? "No Phone" : ProfileController.GetLocalProfile().getPhone();
+                ? "No Phone" : ProfileController.GetLocalProfile().getPhone();
 
         nameTV.setText(ProfileController.GetLocalProfile().getName());
-        phoneTV.setText(phone);
+        phoneTV.setText(new StringBuilder("Phone: ").append(phone));
         dateTV.setText(new StringBuilder("Date: ").append(date));
-        timeTV.setText(new StringBuilder("Consult: ").append(time));
+
+        AppointmentTimeArrayAdapter adapter = new AppointmentTimeArrayAdapter(RefActivity.refACActivity.get(), times);
+        timeSPN.setAdapter(adapter);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(RefActivity.refACActivity.get());
         builder.setView(dialogAppointment);
@@ -154,9 +150,10 @@ public class DoctorListAppointmentRecyclerViewAdapter extends RecyclerView.Adapt
 
                 String name = ProfileController.GetLocalProfile().getName();
                 String thePhone = ProfileController.GetLocalProfile().getPhone();
-                String did = apDoctors.get(lastPosition).getId();
+                String did = appointmentDoctors.get(lastPosition).getId();
+                String time = timeSPN.getSelectedItem().toString();
 
-                AppointmentController.SendAppointmentRequest(name, thePhone, date, time, did, apDoctors.get(lastPosition));
+                AppointmentController.SendAppointmentRequest(name, thePhone, date, time, did, appointmentDoctors.get(lastPosition));
             }
         });
 
@@ -168,18 +165,30 @@ public class DoctorListAppointmentRecyclerViewAdapter extends RecyclerView.Adapt
         });
     }
 
-    private void checkAppointmentIsSent(final DoctorListAppointmentRecyclerViewHolder holder, final int position) {
+    private void checkAndSetAddCancelAppointButton(final DoctorListAppointmentRecyclerViewHolder holder, final int position, final List<String> days, final List<String> times) {
         holder.mLoadingRL.start();
         holder.addCancelAppointmentLDAIB.setVisibility(View.INVISIBLE);
 
-        AppointmentController.CheckAppointmentIsSent(apDoctors.get(position).getId(), new IAction() {
+        AppointmentController.CheckAppointmentIsSent(appointmentDoctors.get(position).getId(), new IAction() {
             @Override
             public void onCompleteAction(Object object) {
                 holder.mLoadingRL.stop();
 
-                isPatientSendAppointmentRequest = (boolean) object;
-                if (!isPatientSendAppointmentRequest) holder.addCancelAppointmentLDAIB.setVisibility(View.VISIBLE);
-                else holder.addCancelAppointmentLDAIB.setVisibility(View.INVISIBLE);
+                if (!(Boolean) object) {
+                    holder.addCancelAppointmentLDAIB.setVisibility(View.VISIBLE);
+                    holder.addCancelAppointmentLDAIB.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            lastPosition = position;
+                            gDays = days;
+                            gTimes = times;
+
+                            setConsultDate();
+                        }
+                    });
+                } else {
+                    holder.addCancelAppointmentLDAIB.setVisibility(View.INVISIBLE);
+                }
             }
         });
     }
@@ -195,6 +204,20 @@ public class DoctorListAppointmentRecyclerViewAdapter extends RecyclerView.Adapt
         return gTimes.get(index);
     }
 
+    private List<String> timeRangeGenerator(List<String> dayList, List<String> timeList, String day) {
+        List<String> times = new ArrayList<>();
+        int index = 0;
+        for (String theDays : dayList) {
+            if (theDays.contains(day)) {
+                times.add(timeList.get(index));
+            }
+
+            index++;
+        }
+
+        return times;
+    }
+
     @NonNull
     @Override
     public DoctorListAppointmentRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -204,19 +227,23 @@ public class DoctorListAppointmentRecyclerViewAdapter extends RecyclerView.Adapt
 
     @Override
     public void onBindViewHolder(@NonNull final DoctorListAppointmentRecyclerViewHolder holder, int position) {
-        final int itemPosition = position;
+        holder.doctorNameLDATV.setText(appointmentDoctors.get(position).getName());
+        holder.doctorSpecialistLDATV.setText(new StringBuilder("Specialist: ").append(appointmentDoctors.get(position).getSpecialist()));
+        holder.doctorClinicLDATV.setText(new StringBuilder("Clinic: ").append(appointmentDoctors.get(position).getClinic()));
+        holder.addCancelAppointmentLDAIB.setVisibility(View.INVISIBLE);
+        holder.appointmentListLDALL.removeAllViews();
 
-        holder.doctorNameLDATV.setText(apDoctors.get(position).getName());
-        holder.doctorSpecialistLDATV.setText(new StringBuilder("Specialist: ").append(apDoctors.get(position).getSpecialist()));
-        holder.doctorClinicLDATV.setText(new StringBuilder("Clinic: ").append(apDoctors.get(position).getClinic()));
-
-        Gson gson = new Gson();
         final List<String> days = new ArrayList<>();
         final List<String> times = new ArrayList<>();
-        List<Appointment> appointments = gson.fromJson(apDoctors.get(position).getAppointments(), new TypeToken<List<Appointment>>(){}.getType());
+        List<Appointment> appointments = appointmentDoctors.get(position).getAppointmentsList();
+        int i = 0;
         if (appointments != null) {
             for (Appointment appointment : appointments) {
+                i++;
+
+                @SuppressLint("InflateParams")
                 View field = LayoutInflater.from(RefActivity.refACActivity.get()).inflate(R.layout.field_single_doctor_appointment_schedule, null);
+                LinearLayout fieldLayout = field.findViewById(R.id.fieldLayout);
                 TextView daysTV = field.findViewById(R.id.daysTV);
                 TextView timeTV = field.findViewById(R.id.timeTV);
 
@@ -226,25 +253,19 @@ public class DoctorListAppointmentRecyclerViewAdapter extends RecyclerView.Adapt
 
                 days.add(appointment.getDays());
                 times.add(appointment.getTime());
+
+                if (appointments.size() == i) {
+                    fieldLayout.setBackground(null);
+                }
             }
         }
 
-        checkAppointmentIsSent(holder, itemPosition);
-        holder.addCancelAppointmentLDAIB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                lastPosition = itemPosition;
-                gDays = days;
-                gTimes = times;
-
-                if (!isPatientSendAppointmentRequest) setConsultDate(days);
-            }
-        });
+        checkAndSetAddCancelAppointButton(holder, position, days, times);
     }
 
     @Override
     public int getItemCount() {
-        return apDoctors.size();
+        return appointmentDoctors.size();
     }
 
     @Override
@@ -267,7 +288,10 @@ public class DoctorListAppointmentRecyclerViewAdapter extends RecyclerView.Adapt
         if (allowDismissDateDialog) {
             String date = DateFormat.getDateInstance().format(new Date(calendar.getTimeInMillis()));
             String day = splitted.get(schedules.indexOf(week));
-            openAppointmentDialog(date, getRangeTime(gDays, day));
+
+            openAppointmentDialog(date, timeRangeGenerator(gDays, gTimes, day));
+        } else {
+            Toast.makeText(RefActivity.refACActivity.get(), ValidationText.NotAvailable, Toast.LENGTH_SHORT).show();
         }
     }
 

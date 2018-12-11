@@ -11,12 +11,16 @@ import android.widget.TextView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.List;
 
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.ActivityTrigger;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.PosterImageCallback;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Blog;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerViewAdapter.BlogRecyclerViewHolder> {
@@ -36,6 +40,7 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull BlogRecyclerViewHolder holder, int position) {
+        final int itemPosition = position;
 
         if (!blogs.get(position).getImage_link().equals("")) {
             Picasso.with(RefActivity.refACActivity.get())
@@ -45,21 +50,10 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
         }
 
         if (!blogs.get(position).getPoster().equals("")) {
-            final BlogRecyclerViewHolder bHolder = holder;
             Picasso.with(RefActivity.refACActivity.get())
                     .load(blogs.get(position).getPoster())
                     .placeholder(R.drawable.no_image_available)
-                    .into(holder.blogPosterDBIV, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            bHolder.blogPosterDBIV.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                        }
-
-                        @Override
-                        public void onError() {
-
-                        }
-                    });
+                    .into(holder.blogPosterDBIV, PosterImageCallback.getInstance().setImageView(holder.blogPosterDBIV));
         }
 
         holder.blogWriterNameBTV.setText(blogs.get(position).getName());
@@ -67,6 +61,13 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
         holder.dateBTV.setText(blogs.get(position).getDate());
         holder.blogTitleBTV.setText(blogs.get(position).getTitle());
         holder.blogContentBTV.setText(blogs.get(position).getContent());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityTrigger.BlogViewerActivity(Vars.ParentActivity.BLOG_ACTIVITY, blogs.get(itemPosition));
+            }
+        });
     }
 
     @Override

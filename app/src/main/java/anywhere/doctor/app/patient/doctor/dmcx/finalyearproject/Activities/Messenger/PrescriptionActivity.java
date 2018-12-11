@@ -53,7 +53,9 @@ public class PrescriptionActivity extends AppCompatActivity {
 
         medicines = new ArrayList<>();
         prescription = getIntent().getParcelableExtra(Vars.Connector.PERSCRIPTION_ACTIVITY_DATA);
+    }
 
+    private void load() {
         if (prescription == null) return;
 
         doctorsNamePTV.setText(prescription.getDoctor_name());
@@ -84,6 +86,7 @@ public class PrescriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_prescription);
 
         init();
+        load();
     }
 
     @Override

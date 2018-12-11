@@ -146,4 +146,20 @@ public class Blog implements Parcelable {
     public static Creator<Blog> getCREATOR() {
         return CREATOR;
     }
+
+    @Override
+    public String toString() {
+        return "Blog{" +
+                "id='" + id + '\'' +
+                ", blogger_id='" + blogger_id + '\'' +
+                ", name='" + name + '\'' +
+                ", detail='" + detail + '\'' +
+                ", image_link='" + image_link + '\'' +
+                ", poster='" + poster + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", date='" + date + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                '}';
+    }
 }

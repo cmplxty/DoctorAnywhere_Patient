@@ -2,11 +2,17 @@
 <resources>
     <color name="colorPrimary">#1EC8C8</color>
     <color name="colorPrimaryDark">#1EC8C8</color>
+    <color name="colorSecondaryDark">#009797</color>
     <color name="colorAccent">#2A86D3</color>
 
-    <color name="cLightCyan">#1EC8C8</color>
-    <color name="cLight_DK1Cyan">#1bb1b1</color>
-    <color name="cLightGrayLow">#83f9f7f7</color>
+    <color name="colorCyan">#4dd0e1</color>
+    <color name="colorLightCyan">#1EC8C8</color>
+    <color name="colorLight_DK1Cyan">#1bb1b1</color>
+    <color name="colorLightGrayLow">#83f9f7f7</color>
     <color name="cLightGray">#d7d7d7</color>
+    <color name="colorDarkGray">#bdbdbd</color>
+    <color name="colorDarkGrayDK">#616161</color>
     <color name="cBlack">#212121</color>
+    <color name="colorLightGray">#e9e9e9</color>
+    <color name="colorTransparentGray">#24767676</color>
 </resources>

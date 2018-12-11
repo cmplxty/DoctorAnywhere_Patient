@@ -22,4 +22,17 @@ public class ValidationText {
     public static final String AppointmentDeleted = "Appointment Deleted.";
     public static final String UpdateSuccessful = "Update Successful.";
     public static final String FailedToStoreDeviceId = "Failed to store device id.";
+    public static final String YouHaveNoPosts = "You have no posts!";
+    public static final String AllFieldsAreRequeired = "All the fields are required!";
+    public static final String DataSaved = "Saved!";
+    public static final String AgeValidity = "Age must be more then 16!";
+    public static final String WeightValidity = "Weight must be more then 50!";
+    public static final String Deleted = "Deleted!";
+    public static final String Describe20OrMoreChars = "Describe more the 20 characters.";
+    public static final String Posted = "Posted!";
+    public static final String EmailSent = "Email sent! Check your email.";
+    public static final String HistoryDeleted = "History Deleted!";
+    public static final String EnterEmail = "Enter a email address!";
+    public static final String NotAvailable = "Not available!";
+    public static final String SeedingFalse = "Seeding False!";
 }

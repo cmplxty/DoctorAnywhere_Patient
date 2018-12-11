@@ -10,20 +10,6 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/doctorTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/your_all_appointments"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/noApptTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,19 +23,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/doctorTV" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/apptRV"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             android:visibility="gone"
-            tools:listitem="@layout/layout_rv_single_appt"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/doctorTV" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/layout_rv_single_appt" />
 
     </android.support.constraint.ConstraintLayout>
 

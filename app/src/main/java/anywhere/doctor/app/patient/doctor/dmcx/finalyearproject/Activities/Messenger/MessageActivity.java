@@ -6,27 +6,31 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.AudioCall.AudioCallHistoryActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.HomeActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Adapter.MessageRecyclerViewAdapter;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.IAction;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.DoctorController;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.MessageController;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Doctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Message;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.MessageUser;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.ErrorText;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
@@ -39,9 +43,9 @@ public class MessageActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private RecyclerView messagesAMRV;
-    private EditText messageAMTV;
+    private EditText messageAreaAMET;
     private ImageButton cameraAMIB;
-    private ImageButton sendAMIB;
+    private FloatingActionButton sendAMFAB;
 
     private MessageRecyclerViewAdapter messageRecyclerViewAdapter;
     private Doctor doctor;
@@ -51,9 +55,9 @@ public class MessageActivity extends AppCompatActivity {
     // Methods
     private void init() {
         toolbar = findViewById(R.id.toolbar);
-        messageAMTV = findViewById(R.id.messageAMTV);
+        messageAreaAMET = findViewById(R.id.messageAreaAMET);
         cameraAMIB = findViewById(R.id.cameraAMIB);
-        sendAMIB = findViewById(R.id.sendAMIB);
+        sendAMFAB = findViewById(R.id.sendAMFAB);
 
         messageRecyclerViewAdapter = new MessageRecyclerViewAdapter();
         LinearLayoutManager manager = new LinearLayoutManager(RefActivity.refACActivity.get());
@@ -64,10 +68,30 @@ public class MessageActivity extends AppCompatActivity {
 
         doctor = getIntent().getParcelableExtra(Vars.Connector.MESSAGE_ACTIVITY_DATA);
         fromActivity = getIntent().getStringExtra(Vars.ActivityOverrider.OPEN_MESSAGE_ACTIVITY);
+        MessageController.UpdateMessageNotViewedToViewedMessage();
+
+        if (doctor.checkEmptyValues()) {
+            DoctorController.LoadDoctor(doctor.getId(), new IAction() {
+                @Override
+                public void onCompleteAction(Object object) {
+                    if (object != null)
+                        doctor = (Doctor) object;
+                }
+            });
+        }
+    }
+
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        toolbar.setTitle(doctor.getName());
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void event() {
-        sendAMIB.setOnClickListener(new View.OnClickListener() {
+        sendAMFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!getMessage().equals("")) {
@@ -114,22 +138,14 @@ public class MessageActivity extends AppCompatActivity {
     * Get Message
     * */
     private String getMessage() {
-        return messageAMTV.getText().toString();
+        return messageAreaAMET.getText().toString();
     }
 
     /*
     * Reset Message
     * */
     private void resetMessage() {
-        messageAMTV.setText("");
-    }
-
-    /*
-     * Initialize toolbar
-     * */
-    private void init_toolbar() {
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(doctor.getName());
+        messageAreaAMET.setText("");
     }
 
     /*
@@ -143,12 +159,16 @@ public class MessageActivity extends AppCompatActivity {
                     String errorCode = (String) object;
                     Log.d("NO MESSAGE", "onCompleteAction: " + errorCode);
                 } else {
-                    List<Message> messages = (List<Message>) object;
-                    if (messages != null) {
-                        messageRecyclerViewAdapter.setMessages(messages);
-                        messageRecyclerViewAdapter.notifyDataSetChanged();
-                        messagesAMRV.scrollToPosition(messages.size() - 1);
+                    List<Message> messages = new ArrayList<>();
+
+                    if (object != null) {
+                        for (Object message : (List<?>) object)
+                            messages.add((Message) message);
                     }
+
+                    messageRecyclerViewAdapter.setMessages(messages);
+                    messageRecyclerViewAdapter.notifyDataSetChanged();
+                    messagesAMRV.scrollToPosition(messages.size() - 1);
                 }
             }
         });
@@ -160,12 +180,10 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
         RefActivity.updateACActivity(this);
-
         init();
-        init_toolbar();
+        setupToolbar();
         event();
         loadList();
-
         checkPermission();
     }
 
@@ -182,23 +200,35 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                onBackPressed();
+                break;
+            }
+        }
 
-        // Show animation at the starting
-//        overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+        return true;
     }
 
     @Override
     public void onBackPressed() {
-        if (fromActivity.equals(Vars.ActivityOverrider.FROM_HOME_ACTIVITY)) {
-            RefActivity.updateACActivity(HomeActivity.instance.get());
-        } else if (fromActivity.equals(Vars.ActivityOverrider.FROM_MESSAGE_USER_LIST_ACTIVITY)) {
-            RefActivity.updateACActivity(MessageUserListActivity.instance);
-        } else if (fromActivity.equals(Vars.ActivityOverrider.FROM_DOCTOR_LIST_ACTIVITY)) {
-            RefActivity.updateACActivity(HomeActivity.instance.get()); // TODO: May change in future....
-        } else {
-            RefActivity.updateACActivity(HomeActivity.instance.get());
+        switch (fromActivity) {
+            case Vars.ActivityOverrider.FROM_HOME_ACTIVITY:
+                RefActivity.updateACActivity(HomeActivity.instance.get());
+                break;
+            case Vars.ActivityOverrider.FROM_MESSAGE_USER_LIST_ACTIVITY:
+                RefActivity.updateACActivity(MessageUserListActivity.instance);
+                break;
+            case Vars.ActivityOverrider.FROM_DOCTOR_LIST_ACTIVITY:
+                RefActivity.updateACActivity(DoctorsListMessageActivity.instance.get());
+                break;
+            case Vars.ActivityOverrider.FROM_AUDIO_CALL_HISTORY:
+                RefActivity.updateACActivity(AudioCallHistoryActivity.instance.get());
+                break;
+            default:
+                RefActivity.updateACActivity(HomeActivity.instance.get());
+                break;
         }
 
         super.onBackPressed();

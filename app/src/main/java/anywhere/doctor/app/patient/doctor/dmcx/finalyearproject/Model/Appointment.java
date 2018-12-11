@@ -21,4 +21,11 @@ public class Appointment {
         return time;
     }
 
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "days='" + days + '\'' +
+                ", time='" + time + '\'' +
+                '}';
+    }
 }

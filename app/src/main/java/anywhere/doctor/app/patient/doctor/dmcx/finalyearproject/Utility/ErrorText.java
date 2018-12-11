@@ -23,4 +23,9 @@ public class ErrorText {
     public static final String PermissionNeedToCallDoctor = "Permission need to call doctor.";
     public static final String ErrorNoDataFound = "No Data Found.";
     public static final String AppontmentNotSent = "Appointment not sent.";
+    public static final String FailedToCreateAccount = "Failed to create account!";
+    public static final String FailedToPost = "Failed to post!";
+    public static final String FailedToDelete = "Failed To Delete";
+    public static final String LocationNotFound = "Location not found!";
+    public static final String EmailNotSent = "Email sent failed!";
 }

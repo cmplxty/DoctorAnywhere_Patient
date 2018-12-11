@@ -34,7 +34,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/H:/Android/Android%20Studio%203.1.1/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_phone_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/H:/Android/Android%20Studio%203.1.1/plugins/android/lib/android.jar!/images/material_design_icons/hardware/ic_keyboard_arrow_down_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -44,11 +44,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="E:\Downloads\Pictures\blogger.png" />
-                                      <entry key="outputName" value="blog_cyan" />
+                                      <entry key="imageAsset" value="E:\Downloads\Pictures\placeholder.png" />
+                                      <entry key="outputName" value="down_black_20" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="1ec8c8" />
+                                      <entry key="themeColor" value="212121" />
                                     </map>
                                   </option>
                                 </PersistentState>

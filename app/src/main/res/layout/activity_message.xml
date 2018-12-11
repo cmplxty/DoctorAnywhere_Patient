@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Activities.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -14,11 +13,12 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            app:title="Doctor Name"
-            app:titleTextColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/Theme.AppCompat"
+            app:title="Doctor Name"
+            app:titleTextColor="@android:color/white" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -27,51 +27,72 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:foregroundGravity="bottom"
-        app:layout_constraintBottom_toTopOf="@+id/cameraAMIB"
+        app:layout_constraintBottom_toTopOf="@+id/sendAMFAB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
-    <ImageButton
-        android:id="@+id/cameraAMIB"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/message_button_bg"
-        android:contentDescription="@string/camera_image"
-        android:src="@drawable/camera_white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/sendAMIB" />
-
-    <EditText
-        android:id="@+id/messageAMTV"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/message_edit_text_bg"
-        android:hint="@string/enter_your_message"
-        android:inputType="textMultiLine"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cameraAMIB"
-        app:layout_constraintEnd_toStartOf="@+id/cameraAMIB"
+        android:background="@drawable/message_box_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/sendAMFAB"
+        app:layout_constraintEnd_toStartOf="@+id/sendAMFAB"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cameraAMIB" />
+        app:layout_constraintTop_toTopOf="@+id/sendAMFAB">
 
-    <ImageButton
-        android:id="@+id/sendAMIB"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        <ImageButton
+            android:id="@+id/cameraAMIB"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/button_bg_circle_white"
+            android:scaleType="center"
+            android:src="@drawable/camera_cyan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/messageAreaAMET"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/message_et_bg"
+            android:hint="@string/enter_your_message"
+            android:inputType="textMultiLine"
+            android:lines="2"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cameraAMIB"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/sendAMFAB"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/message_button_bg"
         android:contentDescription="@string/send_image"
-        android:src="@drawable/send_white"
+        android:scaleType="center"
+        android:src="@drawable/send_white_new"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@android:color/white" />
 
 </android.support.constraint.ConstraintLayout>

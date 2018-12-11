@@ -7,7 +7,8 @@ import java.util.Map;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Firebase.AFModel;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Firebase.ICallback;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.ICallback;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.ErrorText;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.LoadingDialog;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.LoadingText;

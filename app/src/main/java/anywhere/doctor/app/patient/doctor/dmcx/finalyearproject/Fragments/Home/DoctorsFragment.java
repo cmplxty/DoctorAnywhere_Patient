@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.victor.loading.rotate.RotateLoading;
 
 import java.util.ArrayList;
@@ -20,12 +21,12 @@ import java.util.List;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.HomeActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Adapter.DoctorsRecyclerViewAdapter;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.DoctorController;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.IAction;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Fragments.FragmentNames;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.ISearch;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Doctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
 
-public class DoctorsFragment extends Fragment {
+public class DoctorsFragment extends Fragment implements ISearch {
 
     // Variables
     private final int WAIT_TIME_DOCTOR_LIST_LOAD = 500;
@@ -65,7 +66,8 @@ public class DoctorsFragment extends Fragment {
     private class UpdateDoctorListRunnable implements Runnable {
         @Override
         public void run() {
-            updateDoctorsList();
+            updateAdapter(doctors);
+            updateLayout();
         }
     }
     // Class
@@ -113,9 +115,17 @@ public class DoctorsFragment extends Fragment {
             mLoadingRL.stop();
     }
 
-    private void updateDoctorsList() {
+    private void updateAdapter(List<Doctor> doctors) {
         doctorsRecyclerViewAdapter.setDoctors(doctors);
         doctorsRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    private void updateLayout() {
+        if (doctors.size() > 0) {
+            doctorsRV.setVisibility(View.VISIBLE);
+        } else {
+            doctorsRV.setVisibility(View.GONE);
+        }
     }
     // Methods
 
@@ -126,5 +136,29 @@ public class DoctorsFragment extends Fragment {
         init(view);
         task();
         return view;
+    }
+
+    @Override
+    public void onSearch(List<?> objects) {
+        if (objects != null) {
+            List<Doctor> searches = new ArrayList<>();
+            for (Object object  : objects) {
+                if (object  instanceof Doctor)
+                    searches.add((Doctor) object);
+            }
+
+            updateAdapter(searches);
+            updateLayout();
+        }
+    }
+
+    @Override
+    public List<Doctor> getList() {
+        return doctors;
+    }
+
+    @Override
+    public ISearch getiSearch() {
+        return this;
     }
 }

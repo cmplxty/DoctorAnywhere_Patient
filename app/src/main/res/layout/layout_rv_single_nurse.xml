@@ -15,7 +15,7 @@
             android:id="@+id/borderRL"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/bottom_line_cyan"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -27,7 +27,7 @@
             android:id="@+id/sNursePicCIV"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:contentDescription="@string/imageview"
             android:src="@drawable/noperson"
@@ -35,15 +35,26 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/sendRequestNurseIB"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginTop="12dp"
             android:background="@android:color/transparent"
             android:src="@drawable/send_request_cyan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/sNurseGenderImageIV"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/nurse_cyan_dk"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/sNurseNameTV"
@@ -54,7 +65,9 @@
             android:text="@string/marcello_genigaro"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            android:lines="1"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toStartOf="@+id/sendRequestNurseIB"
             app:layout_constraintStart_toEndOf="@+id/sNursePicCIV"
             app:layout_constraintTop_toTopOf="@+id/sNursePicCIV" />
 
@@ -114,7 +127,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintEnd_toStartOf="@+id/sendRequestNurseIB"
             app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
             app:layout_constraintTop_toTopOf="@+id/constraintLayout2">
 
@@ -124,6 +137,8 @@
                 android:layout_height="wrap_content"
                 android:text="Type: "
                 android:textSize="14sp"
+                android:lines="1"
+                android:ellipsize="end"
                 app:layout_constraintBottom_toTopOf="@+id/sNurseDegreeTV"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -137,6 +152,8 @@
                 android:layout_marginTop="2dp"
                 android:text="Degree: "
                 android:textSize="14sp"
+                android:lines="1"
+                android:ellipsize="end"
                 app:layout_constraintBottom_toTopOf="@+id/sNurseGenderTV"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -149,6 +166,8 @@
                 android:layout_marginTop="2dp"
                 android:text="Gender: "
                 android:textSize="14sp"
+                android:lines="1"
+                android:ellipsize="end"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -1,5 +1,6 @@
 package anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Adapter;
 
+import android.bluetooth.BluetoothA2dp;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,10 +14,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.ActivityTrigger;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.IAction;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.MessageController;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Firebase.AFModel;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Doctor;
@@ -28,6 +30,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MessageUserRecyclerViewAdapter extends RecyclerView.Adapter<MessageUserRecyclerViewAdapter.MessageUserRecyclerViewHolder> {
 
     private List<MessageUser> messageUsers = new ArrayList<>();
+    private List<Doctor> doctors = new ArrayList<>();
+
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
+    }
 
     public void setMessageUsers(List<MessageUser> messageUsers) {
         this.messageUsers = messageUsers;
@@ -50,44 +57,35 @@ public class MessageUserRecyclerViewAdapter extends RecyclerView.Adapter<Message
             holder.relativeLayoutLineRL.setVisibility(View.GONE);
         }
 
-        MessageController.LoadMessageUserContent(messageUsers.get(itemPosition).getDoctor(), new IAction() {
-            @Override
-            public void onCompleteAction(Object object) {
+        for (final Doctor doctor : doctors) {
+            if (Objects.equals(doctor.getId(), messageUsers.get(itemPosition).getDoctor())) {
+                Picasso.with(RefActivity.refACActivity.get())
+                        .load(doctor.getImage_link() == null ? AFModel.deflt : doctor.getImage_link())
+                        .placeholder(R.drawable.noperson)
+                        .into(viewHolder.userImageCIV);
 
-                if (object instanceof Doctor) {
-                    final Doctor doctor = (Doctor) object;
-                    Picasso.with(RefActivity.refACActivity.get())
-                            .load(doctor.getImage_link() == null ? AFModel.deflt : doctor.getImage_link())
-                            .placeholder(R.drawable.noperson)
-                            .into(viewHolder.userImageCIV);
-
-                    viewHolder.fromTV.setText(doctor.getName());
-                    switch (messageUsers.get(itemPosition).getType()) {
-                        case AFModel.text:
-                            viewHolder.messageContentTV.setText(messageUsers.get(itemPosition).getContent());
-                            break;
-                        case AFModel.image:
-                            viewHolder.messageContentTV.setText(new StringBuilder("\uD83D\uDCF7 Photo"));
-                            break;
-                        case AFModel.prescription:
-                            viewHolder.messageContentTV.setText(new StringBuilder("\uD83D\uDCC3 Prescription"));
-                            break;
-                    }
-
-                    viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            ActivityTrigger.MessageActivity(doctor, Vars.ActivityOverrider.FROM_MESSAGE_USER_LIST_ACTIVITY);
-                        }
-                    });
-
-                } else {
-                    String errorCode = String.valueOf(object);
-                    Toast.makeText(RefActivity.refACActivity.get(), errorCode, Toast.LENGTH_SHORT).show();
+                viewHolder.fromTV.setText(doctor.getName());
+                switch (messageUsers.get(itemPosition).getType()) {
+                    case AFModel.text:
+                        viewHolder.messageContentTV.setText(messageUsers.get(itemPosition).getContent());
+                        break;
+                    case AFModel.image:
+                        viewHolder.messageContentTV.setText(new StringBuilder("\uD83D\uDCF7 Photo"));
+                        break;
+                    case AFModel.prescription:
+                        viewHolder.messageContentTV.setText(new StringBuilder("\uD83D\uDCC3 Prescription"));
+                        break;
                 }
 
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ActivityTrigger.MessageActivity(doctor, Vars.ActivityOverrider.FROM_MESSAGE_USER_LIST_ACTIVITY);
+                    }
+                });
             }
-        });
+        }
+
     }
 
     @Override

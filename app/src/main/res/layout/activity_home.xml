@@ -15,14 +15,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="@color/colorPrimaryDark"
-            app:title="App"
-            app:titleTextColor="@android:color/white"
-            />
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:background="@color/colorPrimaryDark"
+                app:title="App"
+                app:titleTextColor="@android:color/white"
+                />
+
+            <com.miguelcatalan.materialsearchview.MaterialSearchView
+                android:id="@+id/materialSearchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                app:searchBackground="@android:color/white"
+                app:searchCloseIcon="@drawable/cross_black"
+                app:searchBackIcon="@drawable/back_black"
+                app:searchSuggestionIcon="@drawable/cross_black"
+                />
+
+        </FrameLayout>
 
     </android.support.design.widget.AppBarLayout>
 

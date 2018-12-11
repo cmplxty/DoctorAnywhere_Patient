@@ -20,22 +20,23 @@ import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.HomeA
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Adapter.AppointmentRequestRecyclerViewAdapter;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.AppointmentController;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.IAction;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Fragments.FragmentNames;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.ICallDoctor;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.APRequest;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.ICall;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.ISearch;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.AppointmentRequest;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.ErrorText;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
 
-public class AppointmentFragment extends Fragment {
+public class AppointmentFragment extends Fragment implements ISearch {
 
     // Variables
     private RecyclerView apptRV;
     private TextView noApptTV;
 
     private AppointmentRequestRecyclerViewAdapter appointmentRecyclerViewAdapter;
-    private ICallDoctor iCallDoctor;
+    private List<AppointmentRequest> appointmentRequests;
+    private ICall iCall;
     // Variables
 
     // Methods
@@ -47,33 +48,38 @@ public class AppointmentFragment extends Fragment {
         apptRV.setHasFixedSize(true);
 
         appointmentRecyclerViewAdapter = new AppointmentRequestRecyclerViewAdapter();
-        iCallDoctor = appointmentRecyclerViewAdapter.getiCallDoctor();
+        iCall = appointmentRecyclerViewAdapter.getiCall();
+
+        appointmentRequests = new ArrayList<>();
     }
 
     private void loadList() {
-
         AppointmentController.LoadAppointmentRequests(new IAction() {
             @Override
             public void onCompleteAction(Object object) {
-                List<APRequest> apRequests = new ArrayList<>();
+                appointmentRequests = new ArrayList<>();
 
                 if (object != null) {
                     for (Object request : (List<?>) object) {
-                        apRequests.add((APRequest) request);
+                        appointmentRequests.add((AppointmentRequest) request);
                     }
                 }
 
-                appointmentRecyclerViewAdapter.setAppointments(apRequests);
-                appointmentRecyclerViewAdapter.notifyDataSetChanged();
-                updateUi(apRequests);
+                updateAdapter(appointmentRequests);
+                updateUi(appointmentRequests);
             }
         });
 
         apptRV.setAdapter(appointmentRecyclerViewAdapter);
     }
 
-    private void updateUi(List<APRequest> apRequests) {
-        if (apRequests.size() == 0) {
+    private void updateAdapter(List<AppointmentRequest> appointmentRequests) {
+        appointmentRecyclerViewAdapter.setAppointments(appointmentRequests);
+        appointmentRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    private void updateUi(List<AppointmentRequest> appointmentRequests) {
+        if (appointmentRequests.size() == 0) {
             noApptTV.setVisibility(View.VISIBLE);
             apptRV.setVisibility(View.GONE);
         } else {
@@ -104,10 +110,34 @@ public class AppointmentFragment extends Fragment {
 
         if (requestCode == Vars.RequestCode.REQUEST_CALL_CODE_AP) {
             if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                iCallDoctor.call();
+                iCall.call();
             } else {
                 Toast.makeText(RefActivity.refACActivity.get(), ErrorText.PermissionNeedToCallDoctor, Toast.LENGTH_SHORT).show();
             }
         }
     }
+
+    @Override
+    public void onSearch(List<?> objects) {
+        if (objects != null) {
+            List<AppointmentRequest> searches = new ArrayList<>();
+            for (Object object : objects) {
+                if (object instanceof AppointmentRequest)
+                    searches.add((AppointmentRequest) object);
+            }
+
+            updateAdapter(searches);
+        }
+    }
+
+    @Override
+    public List<AppointmentRequest> getList() {
+        return appointmentRequests;
+    }
+
+    @Override
+    public ISearch getiSearch() {
+        return this;
+    }
+
 }

@@ -33,7 +33,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="2dp"
                     app:cardElevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +94,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="2dp"
                     app:cardElevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -155,7 +155,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="2dp"
                     app:cardElevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -216,7 +216,68 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/audioCallHistoryPageCL"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <RelativeLayout
+                            android:id="@+id/selectedAudioCallHistoryRL"
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:background="@drawable/selected_dashboard_item"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/audioCallHistoryIV"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="8dp"
+                            android:contentDescription="@string/audio_call_history"
+                            android:src="@drawable/call_cyan_0"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/selectedAudioCallHistoryRL" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CALL HISTORY"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/audioCallHistoryIV"
+                            app:layout_constraintStart_toStartOf="@+id/audioCallHistoryIV"
+                            app:layout_constraintTop_toBottomOf="@+id/audioCallHistoryIV" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="2dp"
                     app:cardElevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -277,7 +338,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="2dp"
                     app:cardElevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -338,7 +399,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="2dp"
                     app:cardElevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -399,7 +460,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="2dp"
                     app:cardElevation="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -407,14 +468,14 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <android.support.constraint.ConstraintLayout
-                        android:id="@+id/helpPageCL"
+                        android:id="@+id/mapPageCL"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:clickable="true"
                         android:focusable="true">
 
                         <RelativeLayout
-                            android:id="@+id/selectedHelpRL"
+                            android:id="@+id/selectedMapRL"
                             android:layout_width="match_parent"
                             android:layout_height="5dp"
                             android:background="@drawable/selected_dashboard_item"
@@ -423,26 +484,25 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
-                            android:id="@+id/forumHelpIV"
+                            android:id="@+id/forumMapIV"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:layout_marginTop="8dp"
-                            android:contentDescription="@string/forum_image"
-                            android:src="@drawable/help_cyan_dk"
+                            android:src="@drawable/map_cyan_0"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/selectedHelpRL" />
+                            app:layout_constraintTop_toBottomOf="@+id/selectedMapRL" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/help_cap"
+                            android:text="MAP"
                             android:textColor="@android:color/black"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/forumHelpIV"
-                            app:layout_constraintStart_toStartOf="@+id/forumHelpIV"
-                            app:layout_constraintTop_toBottomOf="@+id/forumHelpIV" />
+                            app:layout_constraintEnd_toEndOf="@+id/forumMapIV"
+                            app:layout_constraintStart_toStartOf="@+id/forumMapIV"
+                            app:layout_constraintTop_toBottomOf="@+id/forumMapIV" />
 
                     </android.support.constraint.ConstraintLayout>
 
@@ -506,8 +566,8 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        app:cardCornerRadius="1dp"
-                        app:cardElevation="0.8dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="1dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
@@ -545,7 +605,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="New message notification"
+                                android:text="New Messages"
                                 android:textColor="@android:color/black"
                                 android:textSize="12sp"
                                 app:layout_constraintBottom_toBottomOf="@+id/messageDBIV"
@@ -578,9 +638,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="4dp"
-                        app:cardCornerRadius="1dp"
-                        app:cardElevation="0.8dp"
+                        android:layout_marginTop="5dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="1dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
@@ -618,7 +678,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="New Home Service Request"
+                                android:text="Home Services"
                                 android:textColor="@android:color/black"
                                 android:textSize="12sp"
                                 app:layout_constraintBottom_toBottomOf="@+id/hsIV"
@@ -626,7 +686,7 @@
                                 app:layout_constraintTop_toBottomOf="@+id/hsTV" />
 
                             <TextView
-                                android:id="@+id/newHomeServiceCounterDBTV"
+                                android:id="@+id/homeServiceCounterDBTV"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
@@ -652,9 +712,9 @@
                         android:layout_marginBottom="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="4dp"
-                        app:cardCornerRadius="1dp"
-                        app:cardElevation="0.8dp"
+                        android:layout_marginTop="5dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="1dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -693,7 +753,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="New Appointment Request"
+                                android:text="Appointments"
                                 android:textColor="@android:color/black"
                                 android:textSize="12sp"
                                 app:layout_constraintBottom_toBottomOf="@+id/apptIV"
@@ -701,7 +761,7 @@
                                 app:layout_constraintTop_toBottomOf="@+id/apptTV" />
 
                             <TextView
-                                android:id="@+id/newApptCounterDBTV"
+                                android:id="@+id/appointmentCounterDBTV"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
@@ -735,7 +795,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/serviceDBCL">
 
                 <TextView
-                    android:id="@+id/blogTitleDBTV"
+                    android:id="@+id/blogTopTitleDBTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/dashboard_title_bg"
@@ -753,7 +813,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/blogTitleDBTV">
+                    app:layout_constraintTop_toBottomOf="@+id/blogTopTitleDBTV">
 
                     <android.support.v7.widget.CardView
                         android:id="@+id/blogDBCV"
@@ -763,8 +823,8 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        app:cardCornerRadius="1dp"
-                        app:cardElevation="0.8dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="1dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -791,8 +851,10 @@
 
                             <android.support.constraint.ConstraintLayout
                                 android:id="@+id/blogMainLayoutDBCL"
+                                android:clickable="true"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+
                                 android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -803,8 +865,8 @@
                                     android:id="@+id/blogPosterDBIV"
                                     android:layout_width="0dp"
                                     android:layout_height="200dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/wallpaper_health"
+                                    android:background="@color/colorLightGray"
+                                    android:src="@drawable/no_image_available"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -813,9 +875,9 @@
                                     android:id="@+id/blogTitleDBTV"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="16dp"
+                                    android:layout_marginEnd="12dp"
                                     android:layout_marginStart="12dp"
-                                    android:layout_marginTop="8dp"
+                                    android:layout_marginTop="12dp"
                                     android:text="Message"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="18sp"
@@ -825,11 +887,11 @@
                                     app:layout_constraintVertical_chainStyle="packed" />
 
                                 <TextView
-                                    android:id="@+id/blogDetailDBTV"
+                                    android:id="@+id/blogContentDBTV"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="16dp"
-                                    android:layout_marginEnd="8dp"
+                                    android:layout_marginBottom="12dp"
+                                    android:layout_marginEnd="12dp"
                                     android:layout_marginStart="12dp"
                                     android:layout_marginTop="4dp"
                                     android:ellipsize="end"

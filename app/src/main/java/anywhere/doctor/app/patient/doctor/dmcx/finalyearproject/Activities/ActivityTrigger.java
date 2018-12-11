@@ -6,9 +6,15 @@ import android.os.Parcelable;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Appointment.DoctorListAppointmentActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.AudioCall.AudioCallActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.AudioCall.AudioCallHistoryActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.AudioCall.DoctorListAudioCallActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Blog.BlogActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Blog.BlogViewerActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Blood.MyBloodDonorActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Blood.MyBloodPostActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Blood.CreateBloodDonorActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Blood.BloodDonorActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Blood.NewBloodPostActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.HomeService.DoctorListHomeServiceActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.HomeService.HomeServiceListActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Messenger.DoctorsListMessageActivity;
@@ -18,8 +24,10 @@ import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Messe
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Messenger.MessageActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Nurse.NurseActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.Prescription.PrescriptionListActivity;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Adapter.DoctorListAppointmentRecyclerViewAdapter;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Blog;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.BloodDonor;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Doctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
 
 public class ActivityTrigger {
@@ -158,10 +166,11 @@ public class ActivityTrigger {
     /*
      * Audio Call Activity
      * */
-    public static void AudioCallActivity(Parcelable parcelable) {
+    public static void AudioCallActivity(Doctor doctor, String parentActivity) {
         Activity activity = RefActivity.refACActivity.get();
         Intent intent = new Intent(activity, AudioCallActivity.class);
-        intent.putExtra(Vars.Connector.AUDIO_CALL_ACTIVITY_DATA, parcelable);
+        intent.putExtra(Vars.Connector.AUDIO_CALL_ACTIVITY_DATA, doctor);
+        intent.putExtra(Vars.ParentActivity.TRIG_AUDIO_CALL_ACTIVITY, parentActivity);
         activity.startActivity(intent);
     }
 
@@ -177,9 +186,66 @@ public class ActivityTrigger {
     /*
      * Blog Viewer Activity
      * */
-    public static void BlogViewerActivity() {
+    public static void BlogViewerActivity(String parentActivity, Blog blog) {
         Activity activity = RefActivity.refACActivity.get();
         Intent intent = new Intent(activity, BlogViewerActivity.class);
+        intent.putExtra(Vars.ParentActivity.TRIG_BLOG_VIEWER_ACTIVITY, parentActivity);
+        intent.putExtra(Vars.Connector.BLOG_VIEWER_ACTIVITY_DATA, blog);
+        activity.startActivity(intent);
+    }
+
+    /*
+     * Blood Donor Activity
+     * */
+    public static void BloodDonorActivity() {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, BloodDonorActivity.class);
+        activity.startActivity(intent);
+    }
+
+    /*
+     * Blood Donor Activity
+     * */
+    public static void AddNewBloodDonorActivity() {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, CreateBloodDonorActivity.class);
+        activity.startActivity(intent);
+    }
+
+    /*
+     * Blood Post Activity
+     * */
+    public static void NewBloodPostActivity() {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, NewBloodPostActivity.class);
+        activity.startActivity(intent);
+    }
+
+    /*
+     * My Blood Donor Activity
+     * */
+    public static void MyBloodDonorActivity(BloodDonor bloodDonor) {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, MyBloodDonorActivity.class);
+        intent.putExtra(Vars.Connector.MY_BLOOD_DONOR_ACTIVITY_DATA, bloodDonor);
+        activity.startActivity(intent);
+    }
+
+    /*
+     * My Blood Donor Activity
+     * */
+    public static void MyBloodPostActivity() {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, MyBloodPostActivity.class);
+        activity.startActivity(intent);
+    }
+
+    /*
+     * Audio Call History Activity
+     * */
+    public static void AudioCallHistoryActivity() {
+        Activity activity = RefActivity.refACActivity.get();
+        Intent intent = new Intent(activity, AudioCallHistoryActivity.class);
         activity.startActivity(intent);
     }
 }

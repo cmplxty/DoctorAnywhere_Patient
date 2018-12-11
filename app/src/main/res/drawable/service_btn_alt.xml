@@ -19,7 +19,7 @@
                 android:bottomLeftRadius="5dp"
                 />
             <solid android:color="@android:color/transparent" />
-            <stroke android:color="@color/cLight_DK1Cyan" android:width="0.5dp" />
+            <stroke android:color="@color/colorLight_DK1Cyan" android:width="0.5dp" />
         </shape>
     </item>
 

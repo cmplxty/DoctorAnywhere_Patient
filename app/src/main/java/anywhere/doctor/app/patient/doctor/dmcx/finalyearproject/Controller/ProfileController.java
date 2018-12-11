@@ -1,6 +1,8 @@
 package anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller;
 
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -11,9 +13,12 @@ import java.util.Map;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Firebase.AFModel;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Firebase.ICallback;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.ICallback;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Fragments.AppFragmentManager;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Fragments.FragmentNames;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Fragments.Home.ProfileEditFragment;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.LocalDatabase.LDBModel;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Doctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Patient;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.LoadingDialog;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.LoadingText;
@@ -125,6 +130,21 @@ public class ProfileController {
                             Toast.makeText(RefActivity.refACActivity.get(), ValidationText.UpdateSuccessful, Toast.LENGTH_SHORT).show();
                         }
                     });
+                }
+            }
+        });
+    }
+
+    public static void OpenProfileEditFragment() {
+        CheckForProfileData(new IAction() {
+            @Override
+            public void onCompleteAction(Object object) {
+                if (object instanceof String) {
+                    Toast.makeText(RefActivity.refACActivity.get(), (String) object, Toast.LENGTH_SHORT).show();
+                } else if (object instanceof Patient) {
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(Vars.Connector.PROFILE_EDIT_FRAGMENT_DATA, (Parcelable) object);
+                    AppFragmentManager.replace(RefActivity.refACActivity.get(), AppFragmentManager.CONTAINER_HOME, new ProfileEditFragment(), FragmentNames.ProfileEdit, bundle);
                 }
             }
         });

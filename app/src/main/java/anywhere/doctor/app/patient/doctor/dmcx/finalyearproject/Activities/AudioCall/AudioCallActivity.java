@@ -1,5 +1,6 @@
 package anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.AudioCall;
 
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,6 +26,7 @@ import java.util.List;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Activities.HomeActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.AudioCallHistory;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.Doctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
@@ -43,6 +45,7 @@ public class AudioCallActivity extends AppCompatActivity {
     private Doctor doctor;
     private String patientId;
     private CallHandler callHandler;
+    private String parentActivity;
     // Variables
 
     // Class
@@ -68,6 +71,7 @@ public class AudioCallActivity extends AppCompatActivity {
         callStateACTV = findViewById(R.id.callStateACTV);
         declineCallFab = findViewById(R.id.declineCallFab);
 
+        parentActivity = getIntent().getStringExtra(Vars.ParentActivity.TRIG_AUDIO_CALL_ACTIVITY);
         doctor = getIntent().getParcelableExtra(Vars.Connector.AUDIO_CALL_ACTIVITY_DATA);
         patientId = Vars.appFirebase.getCurrentUser().getUid();
         callHandler = new CallHandler();
@@ -119,7 +123,23 @@ public class AudioCallActivity extends AppCompatActivity {
         if (call != null) {
             call.hangup();
         }
-        RefActivity.updateACActivity(HomeActivity.instance.get());
+
+        closeActivity();
+    }
+
+    private void closeActivity() {
+        switch (parentActivity) {
+            case Vars.ParentActivity.AUDIO_CALL_HISTORY:
+                RefActivity.updateACActivity(AudioCallHistoryActivity.instance.get());
+                break;
+            case Vars.ParentActivity.DOCTOR_LIST_AUDIO_CALL:
+                RefActivity.updateACActivity(DoctorListAudioCallActivity.instance.get());
+                break;
+            default:
+                RefActivity.updateACActivity(HomeActivity.instance.get());
+                break;
+        }
+
         finish();
     }
     // Methods

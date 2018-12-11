@@ -3,7 +3,9 @@ package anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller;
 import android.widget.Toast;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Firebase.ICallback;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.ICallback;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.ErrorText;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.LoadingDialog;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.LoadingText;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Utility.ValidationText;
@@ -45,6 +47,19 @@ public class AuthController {
                     } else {
                         Toast.makeText(RefActivity.refACActivity.get(), ValidationText.AuthenticationFailed, Toast.LENGTH_SHORT).show();
                     }
+                }
+            }
+        });
+    }
+
+    public static void ForgetPassword(String email) {
+        Vars.appFirebase.forgetPassword(email, new ICallback() {
+            @Override
+            public void onCallback(boolean isSuccessful, Object object) {
+                if (isSuccessful) {
+                    Toast.makeText(RefActivity.refACActivity.get(), ValidationText.EmailSent, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RefActivity.refACActivity.get(), ErrorText.EmailNotSent, Toast.LENGTH_SHORT).show();
                 }
             }
         });

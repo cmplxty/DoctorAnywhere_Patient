@@ -1,6 +1,5 @@
 package anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Adapter;
 
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.victor.loading.rotate.RotateLoading;
 
@@ -17,17 +15,17 @@ import java.util.List;
 
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Common.RefActivity;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.HomeServiceController;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.IAction;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Interface.IAction;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Controller.ProfileController;
-import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.HSDoctor;
+import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Model.HomeServiceDoctor;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.R;
 import anywhere.doctor.app.patient.doctor.dmcx.finalyearproject.Variables.Vars;
 
 public class DoctorsListHomeServiceRecyclerViewAdapter extends RecyclerView.Adapter<DoctorsListHomeServiceRecyclerViewAdapter.DoctorsListHomeServiceRecyclerViewHolder> {
 
-    private List<HSDoctor> hsdoctors = new ArrayList<>();
+    private List<HomeServiceDoctor> hsdoctors = new ArrayList<>();
 
-    public void setHsdoctors(List<HSDoctor> hsdoctors) {
+    public void setHsdoctors(List<HomeServiceDoctor> hsdoctors) {
         this.hsdoctors = hsdoctors;
     }
 
@@ -43,9 +41,9 @@ public class DoctorsListHomeServiceRecyclerViewAdapter extends RecyclerView.Adap
         final int itemPosition = position;
 
         holder.doctorsNameLDHS.setText(hsdoctors.get(position).getName());
-        holder.doctorsSpecialistLDHS.setText(new StringBuilder("Specialist: ").append(hsdoctors.get(position).getSpecialist()));
-        holder.doctorsTimeLDHS.setText(new StringBuilder("Time: ").append(hsdoctors.get(position).getTime()));
-        holder.doctorsLocationLDHS.setText(new StringBuilder("Location: ").append(hsdoctors.get(position).getLocation()));
+        holder.doctorsSpecialistLDHS.setText(hsdoctors.get(position).getSpecialist());
+        holder.doctorsTimeLDHS.setText(hsdoctors.get(position).getTime());
+        holder.doctorsLocationLDHS.setText(hsdoctors.get(position).getLocation());
 
         final DoctorsListHomeServiceRecyclerViewHolder tempVH = holder;
         tempVH.sendAndCancelRequestHSIB.setVisibility(View.INVISIBLE);
@@ -88,6 +86,10 @@ public class DoctorsListHomeServiceRecyclerViewAdapter extends RecyclerView.Adap
                 }
             }
         });
+
+        if (hsdoctors.size() != 1 && hsdoctors.size() - 1 == position) {
+            holder.bottomLineView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -96,7 +98,7 @@ public class DoctorsListHomeServiceRecyclerViewAdapter extends RecyclerView.Adap
     }
 
     class DoctorsListHomeServiceRecyclerViewHolder extends RecyclerView.ViewHolder {
-
+        private View bottomLineView;
         private RotateLoading mLoadingRL;
         private TextView doctorsNameLDHS;
         private TextView doctorsSpecialistLDHS;
@@ -107,6 +109,7 @@ public class DoctorsListHomeServiceRecyclerViewAdapter extends RecyclerView.Adap
         DoctorsListHomeServiceRecyclerViewHolder(View itemView) {
             super(itemView);
 
+            bottomLineView = itemView.findViewById(R.id.bottomLineView);
             mLoadingRL = itemView.findViewById(R.id.mLoadingRL);
             doctorsNameLDHS = itemView.findViewById(R.id.doctorsNameLDHS);
             doctorsSpecialistLDHS = itemView.findViewById(R.id.doctorsSpecialistLDHS);

@@ -17,9 +17,9 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/bloggerProfileImageBCIV"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="12dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/noperson"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,13 +29,15 @@
         android:id="@+id/blogWriterNameBTV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:lines="1"
         android:text="Doctor Name"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/blogWriterDetailBTV"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dateBTV"
         app:layout_constraintStart_toEndOf="@+id/bloggerProfileImageBCIV"
         app:layout_constraintTop_toTopOf="@+id/bloggerProfileImageBCIV"
         app:layout_constraintVertical_chainStyle="packed" />
@@ -44,7 +46,7 @@
         android:id="@+id/blogWriterDetailBTV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
         android:ellipsize="end"
         android:lines="1"
@@ -52,7 +54,7 @@
         android:textColor="@android:color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/bloggerProfileImageBCIV"
-        app:layout_constraintEnd_toStartOf="@+id/dateBTV"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/bloggerProfileImageBCIV"
         app:layout_constraintTop_toBottomOf="@+id/blogWriterNameBTV" />
 
@@ -60,13 +62,13 @@
         android:id="@+id/dateBTV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="16dp"
         android:text="21/01/2018"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/blogWriterDetailBTV"
+        app:layout_constraintBottom_toBottomOf="@+id/blogWriterNameBTV"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/blogWriterDetailBTV" />
+        app:layout_constraintTop_toTopOf="@+id/blogWriterNameBTV" />
 
     <ImageView
         android:id="@+id/blogPosterDBIV"
@@ -83,10 +85,10 @@
         android:id="@+id/blogSymbolBIV"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="16dp"
         android:scaleType="centerCrop"
         android:src="@drawable/blog_cyan"
-        app:layout_constraintBottom_toBottomOf="@+id/blogTitleBTV"
+        app:layout_constraintBottom_toBottomOf="@+id/blogContentBTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/blogTitleBTV" />
 
@@ -95,7 +97,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:text="Blog Title"
         android:textColor="@color/colorPrimaryDark"
@@ -112,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
         android:ellipsize="end"
         android:lines="1"
         android:text="Blog Content Blog Content Blog Content Blog Content"
@@ -121,6 +123,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/blogSymbolBIV"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blogTitleDBTV" />
+        app:layout_constraintTop_toBottomOf="@+id/blogTopTitleDBTV" />
 
 </android.support.constraint.ConstraintLayout>
